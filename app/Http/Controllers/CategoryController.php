@@ -14,21 +14,13 @@ class CategoryController extends Controller
 
     public function getCoursesByCategorySlug($slug)
     {
-        $category =  Category::where(DB::raw('lower(name)'), str_replace('-',' ', $slug))->with('courses')->first();
+        $category =  Category::where('slug', $slug)->with('courses')->first();
 
         if($category->courses) {
             foreach($category->courses as $cc) {
                 $cc->host = Host::where('id', $cc->host)->first();
             }
         }
-
-//        @TODO adaugare logica sa aducem si host pe curs
-//        foreach($category->courses as $key => $c) {
-//            $category->courses[$key] = Course::where('id', $c->id)->with()
-//        }
-        
-
-
 
         if($category) {
             return response()->json([
@@ -44,5 +36,16 @@ class CategoryController extends Controller
             ], 200);
         }
 
+    }
+
+    public function getAllCategories()
+    {
+        $categories = Category::all();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Fetched categories",
+            "categories" => $categories,
+        ], 200);
     }
 }

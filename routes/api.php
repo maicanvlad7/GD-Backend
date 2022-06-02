@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HostController;
@@ -24,6 +25,10 @@ Route::post('course/lesson/{id}', [CourseController::class, 'getById']);
 Route::post('courses/{slug}', [CourseController::class, 'getBySlug']);
 
 Route::post('category/{slug}', [CategoryController::class, 'getCoursesByCategorySlug']);
+Route::post('getAllCategories', [CategoryController::class, 'getAllCategories']);
+
+Route::post('getAllBooks', [BookController::class, 'getAllBooks']);
+Route::post('getBook/{id}', [BookController::class, 'getById']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [ApiController::class, 'logout']);
