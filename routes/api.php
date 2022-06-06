@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HostController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\PreferenceController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ReviewController;
@@ -30,6 +31,8 @@ Route::post('getAllCategories', [CategoryController::class, 'getAllCategories'])
 Route::post('getAllBooks', [BookController::class, 'getAllBooks']);
 Route::post('getBook/{id}', [BookController::class, 'getById']);
 
+Route::post('ucpf', [PreferenceController::class, 'updateOrCreatePref']);
+
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [ApiController::class, 'logout']);
     Route::get('get_user', [ApiController::class, 'get_user']);
@@ -53,4 +56,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('getNotesByCourseId', [NoteController::class, 'getByCourseId']);
     Route::post('getQuestionsByCourseId', [QuestionController::class, 'getAllByCourseId']);
     Route::post('addQuestionToCourse', [QuestionController::class, 'addQuestionToCourse']);
+
+    Route::post('getWatchingNowForUser', [ProgressController::class, 'getWatching']);
 });

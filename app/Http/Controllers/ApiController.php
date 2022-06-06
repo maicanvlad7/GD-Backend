@@ -32,7 +32,7 @@ class ApiController extends Controller
         $checkout_session = \Stripe\Checkout\Session::create([
             'line_items' => [[
                 # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-                'price' => 'price_1KIhabCLTsRzEEEVbttj2ITq',
+                'price' => $request->product_id,
                 'quantity' => 1,
             ]],
             'mode' => 'subscription',
@@ -163,9 +163,15 @@ class ApiController extends Controller
             return response()->json(['error' => $validator->messages()], 200);
         }
 
+        $active = 0;
         $refBy = 0;
+
         if(isset($request->refCode) && !empty($request->refCode)) {
             $refBy = substr($request->refCode, 3);
+        }
+
+        if(isset($request->pid) && !empty($request->pid)) {
+            $active = 1;
         }
 
         //Request is valid, create new user
@@ -174,21 +180,24 @@ class ApiController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'referred_by' => intval($refBy),
+            'active'    => $active,
         ]);
 
         $new_time = date("Y-m-d H:i:s", strtotime('+5 hours'));
 
-        //user created, create activation code
-        $activation = Activation::create([
-            'user_id' => $user->id,
-            'code'    => Str::random(30),
-            'expires' => $new_time
-        ]);
+       if(!$active) {
+           //user created, create activation code
+           $activation = Activation::create([
+               'user_id' => $user->id,
+               'code'    => Str::random(30),
+               'expires' => $new_time
+           ]);
 
-        Mail::raw("Please activate your account: http://localhost:3000/account/activate/" .$activation->code , function($message) {
-            $message->from("dev@gandestediferit.ro");
-            $message->to('maicanvlad1998@gmail.com');
-        });
+           Mail::raw("Please activate your account: http://localhost:3000/account/activate/" .$activation->code , function($message) {
+               $message->from("dev@gandestediferit.ro");
+               $message->to('maicanvlad1998@gmail.com');
+           });
+       }
 
         //User created, return success response
         return response()->json([

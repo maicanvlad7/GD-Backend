@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Progress;
 use App\Models\Lesson;
+use Illuminate\Support\Facades\DB;
 
 class ProgressController extends Controller
 {
@@ -37,8 +38,24 @@ class ProgressController extends Controller
 
         }
 
+    }
 
+    public function getWatching(Request $request)
+    {
 
+        $sql = "SELECT * FROM courses WHERE id 
+                IN(
+                    SELECT course_id FROM progress WHERE user_id = $request->user_id
+                    GROUP BY course_id
+                )";
+
+        $result = DB::select($sql);
+
+        return response()->json([
+            "success" => true,
+            "message" => "Continue watching found",
+            "data" => $result
+        ], 200);
 
     }
 
