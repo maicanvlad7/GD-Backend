@@ -17,28 +17,47 @@ class ApiController extends Controller
 {
     public function __construct()
     {
-        \Stripe\Stripe::setApiKey("sk_test_51KIdcwCLTsRzEEEV6w5FaHBUXKT2jEtD390jAwFPwudJ1aC8CITPGbvseT2HQo8Z4mdwXIv5AhA8ibUBNPrrdhlH00CvcOfBSD");
+        \Stripe\Stripe::setApiKey("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");
     }
 
     public function stripe(Request $request)
     {
-        \Stripe\Stripe::setApiKey("sk_test_51KIdcwCLTsRzEEEV6w5FaHBUXKT2jEtD390jAwFPwudJ1aC8CITPGbvseT2HQo8Z4mdwXIv5AhA8ibUBNPrrdhlH00CvcOfBSD");
+        \Stripe\Stripe::setApiKey("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");
         header('Content-Type: application/json');
 
 
 
-        $YOUR_DOMAIN = 'http://localhost:3000/course/membership-levels';
+        $YOUR_DOMAIN = 'https://gandestediferit.ro/course/membership-levels';
 
-        $checkout_session = \Stripe\Checkout\Session::create([
-            'line_items' => [[
-                # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-                'price' => $request->product_id,
-                'quantity' => 1,
-            ]],
-            'mode' => 'subscription',
-            'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
-        ]);
+
+
+        if(strtoupper($request->dc) == "GD50" || strtoupper($request->dc) == "GD20") {
+            $checkout_session = \Stripe\Checkout\Session::create([
+                'line_items' => [[
+                    # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
+                    'price' => $request->product_id,
+                    'quantity' => 1,
+                ]],
+                'mode' => 'subscription',
+                'discounts' => [[
+                    'coupon' => strtoupper($request->dc),
+                ]],
+                'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
+                'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
+            ]);
+        }else {
+            $checkout_session = \Stripe\Checkout\Session::create([
+                'line_items' => [[
+                    # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
+                    'price' => $request->product_id,
+                    'quantity' => 1,
+                ]],
+                'mode' => 'subscription',
+                'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
+                'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
+            ]);
+        }
+
 
         header("HTTP/1.1 303 See Other");
 
@@ -51,8 +70,9 @@ class ApiController extends Controller
     {
         $user = User::find($request->input('gd_id'));
 
-        $user->stripe_id = $request->input('stripe_id');
+        $user->stripe_id    = $request->input('stripe_id');
         $user->subscription = $request->input('sub_id');
+        $user->level        = $request->input('level');
 
         if($user->save()) {
             //User created, return success response
@@ -67,7 +87,7 @@ class ApiController extends Controller
 
     public function get_stripe_customer_data(Request $request)
     {
-        \Stripe\Stripe::setApiKey("sk_test_51KIdcwCLTsRzEEEV6w5FaHBUXKT2jEtD390jAwFPwudJ1aC8CITPGbvseT2HQo8Z4mdwXIv5AhA8ibUBNPrrdhlH00CvcOfBSD");
+        \Stripe\Stripe::setApiKey("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");
 
         $session = \Stripe\Checkout\Session::retrieve($request->input('session_id'));
         $customer = \Stripe\Customer::retrieve($session->customer);
@@ -180,7 +200,7 @@ class ApiController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'referred_by' => intval($refBy),
-            'active'    => $active,
+            'active'    => 1,
         ]);
 
         $new_time = date("Y-m-d H:i:s", strtotime('+5 hours'));
@@ -193,10 +213,14 @@ class ApiController extends Controller
                'expires' => $new_time
            ]);
 
-           Mail::raw("Please activate your account: http://localhost:3000/account/activate/" .$activation->code , function($message) {
-               $message->from("dev@gandestediferit.ro");
-               $message->to('maicanvlad1998@gmail.com');
+
+           $email  = $request->email;
+
+           Mail::raw("Va puteti activa contul apasand pe linkul urmator: https://gandestediferit.ro/account/activate/" .$activation->code , function($message) use ($email) {
+               $message->from("website@gandestediferit.ro");
+               $message->to($email);
            });
+
        }
 
         //User created, return success response

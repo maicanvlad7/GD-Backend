@@ -89,6 +89,23 @@ class CourseController extends Controller
         //
     }
 
+    public function getRecommended()
+    {
+        $courses = Course::inRandomOrder()->limit(5)->get();
+
+        foreach ($courses as $co) {
+            $co->hoster = Host::find($co->host);
+        }
+
+        return response()->json([
+            "success" => true,
+            "message" => "Courses recommended found",
+            "data" => $courses
+        ], 200);
+
+
+    }
+
     public function getBySlug($slug)
     {
         $course =  Course::where(DB::raw('lower(name)'), str_replace('-',' ', $slug))->first();

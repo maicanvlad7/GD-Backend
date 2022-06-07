@@ -34,6 +34,8 @@ Route::post('getBook/{id}', [BookController::class, 'getById']);
 Route::post('ucpf', [PreferenceController::class, 'updateOrCreatePref']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
+
+
     Route::get('logout', [ApiController::class, 'logout']);
     Route::get('get_user', [ApiController::class, 'get_user']);
     Route::get('products', [ProductController::class, 'index']);
@@ -58,4 +60,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('addQuestionToCourse', [QuestionController::class, 'addQuestionToCourse']);
 
     Route::post('getWatchingNowForUser', [ProgressController::class, 'getWatching']);
+
+    Route::post('getRecommended', [CourseController::class, 'getRecommended']);
 });
