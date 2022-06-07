@@ -214,13 +214,6 @@ class ApiController extends Controller
            ]);
 
 
-           $email  = $request->email;
-
-           Mail::raw("Va puteti activa contul apasand pe linkul urmator: https://gandestediferit.ro/account/activate/" .$activation->code , function($message) use ($email) {
-               $message->from("website@gandestediferit.ro");
-               $message->to($email);
-           });
-
        }
 
         //User created, return success response
