@@ -14,7 +14,9 @@ class CategoryController extends Controller
 
     public function getCoursesByCategorySlug($slug)
     {
-        $category =  Category::where('slug', $slug)->with('courses')->first();
+        $category =  Category::where('slug', $slug)->with(['courses' => function($query) {
+            $query->orderBy('score', 'desc');
+        }])->first();
 
         if($category->courses) {
             foreach($category->courses as $cc) {
