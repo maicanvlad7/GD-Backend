@@ -47,7 +47,7 @@ class ProgressController extends Controller
                 hosts.name
                 FROM courses
                 INNER JOIN hosts ON courses.host = hosts.id
-                 WHERE id 
+                 WHERE courses.id 
                 IN(
                     SELECT course_id FROM progress WHERE user_id = $request->user_id
                     GROUP BY course_id
