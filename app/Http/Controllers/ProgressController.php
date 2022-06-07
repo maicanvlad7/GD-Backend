@@ -44,7 +44,7 @@ class ProgressController extends Controller
     {
 
         $sql = "SELECT courses.*,
-                hosts.name
+                hosts.name AS teacher
                 FROM courses
                 INNER JOIN hosts ON courses.host = hosts.id
                  WHERE courses.id 
