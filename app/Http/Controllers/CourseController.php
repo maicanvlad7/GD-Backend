@@ -127,6 +127,22 @@ class CourseController extends Controller
 
     }
 
+    public function getFavoriteCourses(Request $request)
+    {
+        $sql = "SELECT courses.*, favorites.course_id, favorites.user_id, hosts.name AS host_name FROM courses 
+                INNER JOIN favorites ON courses.id = favorites.course_id
+                INNER JOIN hosts     ON courses.host = hosts.id
+                WHERE favorites.user_id = $request->user_id";
+
+        $query = DB::select($sql);
+
+        return response()->json([
+            "success" => true,
+            "message" => "Favs found",
+            "favorites" => $query
+        ], 200);
+    }
+
     public function getById(Request $request, $id)
     {
         $course = Course::where('id', $id)->with(['lessons','reviews'])->first();

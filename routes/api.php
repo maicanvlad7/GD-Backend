@@ -66,4 +66,5 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     Route::post('controlFav', [FavoritesController::class, 'controlFav']);
     Route::post('getFavorites', [FavoritesController::class, 'getFavorites']);
+    Route::post('getFavoriteCourses', [CourseController::class, 'getFavoriteCourses']);
 });
