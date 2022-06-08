@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\HostController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PreferenceController;
@@ -62,4 +63,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('getWatchingNowForUser', [ProgressController::class, 'getWatching']);
 
     Route::post('getRecommended', [CourseController::class, 'getRecommended']);
+
+    Route::post('controlFav', [FavoritesController::class, 'controlFav']);
 });
