@@ -106,6 +106,8 @@ class CourseController extends Controller
 
     }
 
+
+
     public function getBySlug($slug)
     {
         $course =  Course::where(DB::raw('lower(name)'), str_replace('-',' ', $slug))->first();
