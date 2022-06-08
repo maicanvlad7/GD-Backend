@@ -87,7 +87,7 @@ class FavoritesController extends Controller
     {
         $favorite = favorites::where([
             ['course_id' ,'=', $request->course_id],
-            ['user' ,'=', $request->user_id],
+            ['user_id' ,'=', $request->user_id],
         ])->first();
 
         if($favorite === null) {
@@ -104,7 +104,7 @@ class FavoritesController extends Controller
 
             $favorite = favorites::where([
                 ['course_id' ,'=', $request->course_id],
-                ['user' ,'=', $request->user_id],
+                ['user_id' ,'=', $request->user_id],
             ])->delete();
 
             $message = 'Curs înlăturat de la favorite!';
