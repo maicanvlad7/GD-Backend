@@ -117,4 +117,16 @@ class FavoritesController extends Controller
         ], 200);
 
     }
+
+    public function getFavorites(Request $request)
+    {
+        $favorite = favorites::select('course_id')->where('user_id', '=', $request->user_id)->get();
+
+        return response()->json([
+            "success" => true,
+            "message" => 'Fav found',
+            "data" => $favorite,
+        ], 200);
+
+    }
 }
