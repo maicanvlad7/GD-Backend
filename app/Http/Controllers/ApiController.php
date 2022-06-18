@@ -132,21 +132,10 @@ class ApiController extends Controller
                 'cancel_at_period_end' => true,
             ]);
 
-        $user->subscription = 0;
-
-        if ( $user->save() ) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Customer Subscription canceled',
-            ], Response::HTTP_OK);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Cancellation failed'
-            ], Response::HTTP_OK);
-        };
-
-
+        return response()->json([
+            'success' => true,
+            'message' => 'Customer Subscription canceled',
+        ], Response::HTTP_OK);
 
     }
 
