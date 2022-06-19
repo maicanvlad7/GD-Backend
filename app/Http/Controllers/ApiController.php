@@ -158,7 +158,7 @@ class ApiController extends Controller
                 'text' => 'Testing'
             );
             curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-            curl_setopt($ch, CURLOPT_USERPWD, 'api' . ':' . 'ef5ca242b9574fe02115f9f2cb786bd7-76f111c4-ecc47d8b');
+            curl_setopt($ch, CURLOPT_USERPWD, 'api' . ':' . env('MAILGUN_SECRET'));
 
             $result = curl_exec($ch);
             if (curl_errno($ch)) {
