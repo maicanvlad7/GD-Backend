@@ -145,11 +145,27 @@ class ApiController extends Controller
 
         if(isset($user->id)) {
 
-            Mail::raw('Hi, welcome user!', function ($message) {
-                $message->to('maicanvlad1998@gmail.com')
-                ->subject('resetare parola GD')
-                ->setBody('test resetare parola');
-            });
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, 'https://api.mailgun.net/v3/gandestediferit.ro/messages');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+
+            $post = array(
+                'from' => 'Excited',
+                'to' => 'maicanvlad1998@gmail.com',
+                'subject' => 'Hello',
+                'text' => 'Testing'
+            );
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+            curl_setopt($ch, CURLOPT_USERPWD, 'api' . ':' . 'ef5ca242b9574fe02115f9f2cb786bd7-76f111c4-ecc47d8b');
+
+            $result = curl_exec($ch);
+            if (curl_errno($ch)) {
+                echo 'Error:' . curl_error($ch);
+            }
+            curl_close($ch);
+
 
             return response()->json([
                 'success' => true,
