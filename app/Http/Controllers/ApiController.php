@@ -154,7 +154,7 @@ class ApiController extends Controller
             curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"personalizations\": [{\"to\": [{\"email\": \"maicanvlad1998@gmail.com\"}]}],\"from\": {\"email\": \"website@gandestediferit.ro\"},\"subject\": \"Sending with SendGrid is Fun\",\"content\": [{\"type\": \"text/plain\", \"value\": \"and easy to do anywhere, even with cURL\"}]}");
 
             $headers = array();
-            $headers[] = 'Authorization: _ENV["Bearer'.env('SENDGRID_API_KEY').' "]';
+            $headers[] = 'Authorization: _ENV["Bearer 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"]';
             $headers[] = 'Content-Type: application/json';
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
