@@ -34,6 +34,8 @@ Route::post('getBook/{id}', [BookController::class, 'getById']);
 
 Route::post('ucpf', [PreferenceController::class, 'updateOrCreatePref']);
 
+Route::post('rup', [ApiController::class, 'generateResetCode']);
+
 Route::group(['middleware' => ['jwt.verify']], function() {
 
 

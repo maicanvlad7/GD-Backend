@@ -139,6 +139,21 @@ class ApiController extends Controller
 
     }
 
+    public function generateResetCode(Request $request)
+    {
+        $user = User::where('email',$request->input('email'))->first();
+
+        if(isset($user->id)) {
+            //generam cod si il bagam in tabela corecta
+            //returnam succes si mesaj pentru alerta
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Emailul nu este asociat cu un cont. Incearca din nou!',
+            ], Response::HTTP_OK);
+        }
+    }
+
     public function getReferred(Request $request)
     {
         $refer = new \stdClass();
