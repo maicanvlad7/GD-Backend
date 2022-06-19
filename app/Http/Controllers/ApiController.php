@@ -17,12 +17,12 @@ class ApiController extends Controller
 {
     public function __construct()
     {
-        \Stripe\Stripe::setApiKey("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");
+        \Stripe\Stripe::setApiKey(env('STRIPE_API_KEY'));
     }
 
     public function stripe(Request $request)
     {
-        \Stripe\Stripe::setApiKey("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");
+        \Stripe\Stripe::setApiKey(env('STRIPE_API_KEY'));
         header('Content-Type: application/json');
 
 
@@ -87,7 +87,7 @@ class ApiController extends Controller
 
     public function get_stripe_customer_data(Request $request)
     {
-        \Stripe\Stripe::setApiKey("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");
+        \Stripe\Stripe::setApiKey(env('STRIPE_API_KEY'));
 
         $session = \Stripe\Checkout\Session::retrieve($request->input('session_id'));
         $customer = \Stripe\Customer::retrieve($session->customer);
