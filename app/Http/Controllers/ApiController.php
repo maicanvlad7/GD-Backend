@@ -143,13 +143,13 @@ class ApiController extends Controller
     {
         $user = User::where('email',$request->input('email'))->first();
 
-        $data = array (
-            'user_email' => $user->email,
-            'message' => 'Test trimitere',
-        );
-
-
         if(isset($user->id)) {
+
+            $data = array (
+                'user_email' => $user->email,
+                'message' => 'Test trimitere',
+            );
+
             //generam cod si il bagam in tabela corecta
             Mail::raw('Test trimitere de aici', function ($message) use ($data) {
                 $message->to($data['user_email'])
