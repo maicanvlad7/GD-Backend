@@ -151,11 +151,10 @@ class ApiController extends Controller
             );
 
             //generam cod si il bagam in tabela corecta
-            $email = new \SendGrid\Mail\Mail();
-            $email->setFrom("website@gandestediferit.ro", "Gandeste Diferit Romania");
-            $email->setSubject("Resetare parola - GD");
-            $email->addTo("maicanvlad1998@gmail.com", "");
-            $email->addContent("text/plain", "La la la test");
+            Mail::raw('Test trimitere de aici', function ($message) use ($data) {
+                $message->to($data['user_email'])
+                ->subject('Resetare parola GandesteDiferit');
+            });
 
             $sendgrid = new \SendGrid(env('SENDGRID_API_KEY'));
             try {
