@@ -145,17 +145,11 @@ class ApiController extends Controller
 
         if(isset($user->id)) {
 
-            $data = array (
-                'user_email' => $user->email,
-                'message' => 'Test trimitere',
-            );
-
-            //generam cod si il bagam in tabela corecta
-            Mail::raw('Test trimitere de aici', function ($message) use ($data) {
-                $message->to($data['user_email'])
-                ->subject('Resetare parola GandesteDiferit');
-            });
-
+            $email = new \SendGrid\Mail\Mail();
+            $email->setFrom("website@gandestediferit.ro", "Example User");
+            $email->setSubject("Resetare Parola - GDRO");
+            $email->addTo("maicanvlad1998@gmail.com", "Example User");
+            $email->addContent("text/plain", "test 123");
             $sendgrid = new \SendGrid(env('SENDGRID_API_KEY'));
             try {
                 $response = $sendgrid->send($email);
