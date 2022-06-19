@@ -143,8 +143,23 @@ class ApiController extends Controller
     {
         $user = User::where('email',$request->input('email'))->first();
 
+        $data = array (
+            'user_email' => $user->email,
+            'message' => 'Test trimitere',
+        );
+
+
         if(isset($user->id)) {
             //generam cod si il bagam in tabela corecta
+            Mail::raw('Test trimitere de aici', function ($message) use ($data) {
+                $message->to($data['user_email'])
+                ->subject('Resetare parola GandesteDiferit');
+            });
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Linkul de resetare a fost trimis pe email. Te rugam sa verifici si folderul de spam!',
+            ], Response::HTTP_OK);
             //returnam succes si mesaj pentru alerta
         } else {
             return response()->json([

@@ -32,8 +32,10 @@ Route::post('getAllCategories', [CategoryController::class, 'getAllCategories'])
 Route::post('getAllBooks', [BookController::class, 'getAllBooks']);
 Route::post('getBook/{id}', [BookController::class, 'getById']);
 
+//update or create user preferences
 Route::post('ucpf', [PreferenceController::class, 'updateOrCreatePref']);
 
+//reset user password
 Route::post('rup', [ApiController::class, 'generateResetCode']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
