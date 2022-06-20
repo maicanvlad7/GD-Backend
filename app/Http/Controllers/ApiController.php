@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activation;
+use App\Models\Reset;
 use Illuminate\Support\Str;
 use JWTAuth;
 use App\Models\User;
@@ -141,37 +142,45 @@ class ApiController extends Controller
 
     public function generateResetCode(Request $request)
     {
+
+        //verificam daca exista utilizatorul
         $user = User::where('email',$request->input('email'))->first();
 
         if(isset($user->id)) {
 
-            $ch = curl_init();
+            //generam string random pentru token reset
+            $pwResToken = Str::random(30);
 
-            curl_setopt($ch, CURLOPT_URL, 'https://api.mailgun.net/v3/gandestediferit.ro/messages');
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_POST, 1);
-
-            $post = array(
-                'from' => 'Excited',
-                'to' => 'maicanvlad1998@gmail.com',
-                'subject' => 'Hello',
-                'text' => 'Testing'
+            //inseram codul in tabela de reset, folosim update or create in caz ca nu e prima oara cand da reset
+            $reset = Reset::updateOrCreate(
+                ['email' => $user->email],
+                ['token' => $pwResToken]
             );
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-            curl_setopt($ch, CURLOPT_USERPWD, 'api' . ':' . env('MAILGUN_SECRET'));
 
-            $result = curl_exec($ch);
-            if (curl_errno($ch)) {
-                echo 'Error:' . curl_error($ch);
+            //message building
+            $mailMessage = 'Pentru a reseta parola asociata cu contul dvs. va rugam sa accesati linkul : https://gandestediferit.ro/final-forgot?tk=' . $pwResToken;
+
+            //trimitem mail SMTP
+            Mail::raw($mailMessage, function($message) use($user) {
+                $message->from('website@gandestediferit.ro', 'Gandeste Diferit App');
+                $message->subject('Resetare parola');
+                $message->to($user->email);
+            });
+
+            //daca nu se trimite mailul anuntam userul
+            if(Mail::failures()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'A aparut o eroare. Te rog sa soliciti un cod mai tarziu!',
+                ], Response::HTTP_OK);
+            } else {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Linkul de resetare a fost trimis pe email. Te rugam sa verifici si folderul de spam / promotii!',
+                ], Response::HTTP_OK);
             }
-            curl_close($ch);
 
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Linkul de resetare a fost trimis pe email. Te rugam sa verifici si folderul de spam!',
-            ], Response::HTTP_OK);
-            //returnam succes si mesaj pentru alerta
+            //daca mailul nu exista in baza de date we let the user know
         } else {
             return response()->json([
                 'success' => false,
