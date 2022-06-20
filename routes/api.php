@@ -37,6 +37,7 @@ Route::post('ucpf', [PreferenceController::class, 'updateOrCreatePref']);
 
 //reset user password
 Route::post('rup', [ApiController::class, 'generateResetCode']);
+Route::post('crcfu', [ApiController::class, 'checkResetCode']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
 

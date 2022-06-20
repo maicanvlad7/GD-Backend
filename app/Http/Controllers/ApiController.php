@@ -140,6 +140,23 @@ class ApiController extends Controller
 
     }
 
+    public function checkResetCode(Request $request)
+    {
+        $reset = Reset::where('token', $request->input('token'))->first();
+
+        if(isset($user->id)) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Acest token exista',
+            ], Response::HTTP_OK);
+        }else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Acest token nu exista',
+            ], Response::HTTP_OK);
+        }
+    }
+
     public function generateResetCode(Request $request)
     {
 
