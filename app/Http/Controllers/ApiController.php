@@ -140,6 +140,27 @@ class ApiController extends Controller
 
     }
 
+    public function saveUserResetPassword(Request $request)
+    {
+        $reset = Reset::where('token', $request->input('token'))->first();
+
+        $user = User::where('email', $reset->email)->first();
+
+        $user->password = bcrypt($request->password);
+
+        if($user->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Parola schimbata cu succes',
+            ], Response::HTTP_OK);
+        }else {
+            return response()->json([
+                'success' => false,
+                'message' => 'A aparut o problema',
+            ], Response::HTTP_OK);
+        }
+    }
+
     public function checkResetCode(Request $request)
     {
         $reset = Reset::where('token', $request->input('token'))->first();
