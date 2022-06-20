@@ -144,7 +144,7 @@ class ApiController extends Controller
     {
         $reset = Reset::where('token', $request->input('token'))->first();
 
-        if(isset($user->id)) {
+        if(isset($reset->id)) {
             return response()->json([
                 'success' => true,
                 'message' => 'Acest token exista',
