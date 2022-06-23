@@ -189,6 +189,13 @@ class CourseController extends Controller
     {
         $courses = Course::with('category')->where('host', $request->host_id)->get();
 
+        $sql = "SELECT categories.name as cat_name , courses.* FROM courses
+                    INNER JOIN categories ON categories.id = courses.category_id
+                    WHERE courses.host = $request->host_id";
+
+        $courses = DB::select($sql);
+
+
         return response()->json([
             "success" => true,
             "message" => "Courses found",
