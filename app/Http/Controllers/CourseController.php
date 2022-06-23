@@ -187,7 +187,6 @@ class CourseController extends Controller
 
     public function getCoursesByHost(Request $request)
     {
-        $courses = Course::with('category')->where('host', $request->host_id)->get();
 
         $sql = "SELECT categories.name as cat_name , courses.* FROM courses
                     INNER JOIN categories ON categories.id = courses.category_id
