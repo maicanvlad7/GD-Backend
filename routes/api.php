@@ -73,4 +73,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('controlFav', [FavoritesController::class, 'controlFav']);
     Route::post('getFavorites', [FavoritesController::class, 'getFavorites']);
     Route::post('getFavoriteCourses', [CourseController::class, 'getFavoriteCourses']);
+
+    Route::post('ghdbi', [HostController::class, 'getDataById']);
+    Route::post('gcbhi', [CourseController::class, 'getCoursesByHost']);
 });

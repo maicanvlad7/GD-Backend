@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activation;
+use App\Models\Host;
 use App\Models\Reset;
 use Illuminate\Support\Str;
 use JWTAuth;
@@ -139,6 +140,7 @@ class ApiController extends Controller
         ], Response::HTTP_OK);
 
     }
+
 
     public function saveUserResetPassword(Request $request)
     {
