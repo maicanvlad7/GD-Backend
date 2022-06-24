@@ -10,6 +10,7 @@ use App\Http\Controllers\PreferenceController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ReviewController;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
@@ -39,6 +40,8 @@ Route::post('ucpf', [PreferenceController::class, 'updateOrCreatePref']);
 Route::post('rup', [ApiController::class, 'generateResetCode']);
 Route::post('crcfu', [ApiController::class, 'checkResetCode']);
 Route::post('surp', [ApiController::class, 'saveUserResetPassword']);
+
+Route::post('gmwc', [CourseController::class, 'getMostViewed']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
 

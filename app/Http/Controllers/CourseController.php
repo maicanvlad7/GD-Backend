@@ -202,5 +202,21 @@ class CourseController extends Controller
         ], 200);
     }
 
+    public function getMostViewed()
+    {
+        $sql = "SELECT hosts.name AS host_name, courses.* FROM courses
+                INNER JOIN hosts ON courses.host = hosts.id
+                ORDER BY views DESC
+                LIMIT 5";
+
+        $courses = DB::select($sql);
+
+        return response()->json([
+            "success" => true,
+            "message" => "Most viewed courses found",
+            "data" => $courses
+        ], 200);
+    }
+
 
 }
