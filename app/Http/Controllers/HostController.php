@@ -93,4 +93,26 @@ class HostController extends Controller
             "data" => $host
         ], 200);
     }
+
+    public function getRefByHost(Request $request)
+    {
+        $sqlTotal   = "SELECT COUNT(id) as total FROM users WHERE referred_by = $request->host_id";
+
+        $sqlAbonati = "SELECT COUNT(id) as abonati FROM users WHERE referred_by = $request->host_id AND subscription != 0";
+
+        $data = new \stdClass();
+
+        $total = DB::select($sqlTotal);
+        $abonati = DB::select($sqlAbonati);
+
+        $data->total   = $total->total;
+        $data->abonati = $abonati->abonati;
+
+        return response()->json([
+            "success" => true,
+            "message" => "Host ref data",
+            "data" => $data
+        ], 200);
+    }
+
 }

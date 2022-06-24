@@ -76,4 +76,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     Route::post('ghdbi', [HostController::class, 'getDataById']);
     Route::post('gcbhi', [CourseController::class, 'getCoursesByHost']);
+
+    Route::post('ghrd', [HostController::class, 'getRefByHost']);
 });
