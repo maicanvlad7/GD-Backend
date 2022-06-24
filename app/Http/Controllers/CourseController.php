@@ -218,5 +218,35 @@ class CourseController extends Controller
         ], 200);
     }
 
+//    for edit only
+    public function showAllCourses()
+    {
+        $courses = Course::all();
+
+        return view('courses', ["data" => $courses]);
+    }
+
+    public function showCourseById($id)
+    {
+        $course = new Course();
+
+        $courseData = $course::where('id', $id)->first();
+        $courseData = $courseData->getOriginal();
+
+        return view('edit_course', ["data" => $courseData]);
+
+
+    }
+
+    public function saveCourseAdmin(Request $request, $id)
+    {
+        $test = $request->all();
+
+        unset($test['_token']);
+        unset($test['submit']);
+
+        DB::table('courses')->where('id', $id)->update($test);
+    }
+
 
 }

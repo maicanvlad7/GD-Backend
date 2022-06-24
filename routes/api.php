@@ -43,6 +43,7 @@ Route::post('surp', [ApiController::class, 'saveUserResetPassword']);
 
 Route::post('gmwc', [CourseController::class, 'getMostViewed']);
 
+
 Route::group(['middleware' => ['jwt.verify']], function() {
 
 

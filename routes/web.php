@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HostController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('showCourses', [CourseController::class, 'showAllCourses']);
+Route::get('course/{id}', [CourseController::class, 'showCourseById']);
+Route::post('course/{id}', [CourseController::class, 'saveCourseAdmin']);
 
