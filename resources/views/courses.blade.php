@@ -10,8 +10,9 @@
 
 
 <div class="container">
-    <div class="row text-center">
-        <div class="col-md-12">
+    <div class="row text-center" style="padding-top:150px;padding-bottom:150px;">
+        <div class="col-md-12 p-5 card shadow rounded">
+            <h3>Editeaza cursurile de pe GD</h3>
             <table class="table table-striped">
                 <thead>
                 <tr>

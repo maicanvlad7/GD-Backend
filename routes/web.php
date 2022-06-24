@@ -22,4 +22,6 @@ Route::get('/', function () {
 Route::get('showCourses', [CourseController::class, 'showAllCourses']);
 Route::get('course/{id}', [CourseController::class, 'showCourseById']);
 Route::post('course/{id}', [CourseController::class, 'saveCourseAdmin']);
+Route::get('login', [CourseController::class, 'login']);
+Route::post('login', [CourseController::class, 'doLogin']);
 
