@@ -99,7 +99,7 @@ class HostController extends Controller
     {
         $sqlTotal   = "SELECT COUNT(id) as total FROM users WHERE referred_by = $request->host_id";
 
-        $sqlAbonati = "SELECT COUNT(id) as abonati FROM users WHERE referred_by = $request->host_id AND subscription != 0";
+        $sqlAbonati = "SELECT COUNT(id) as abonati FROM users WHERE referred_by = $request->host_id AND subscription != '0'";
 
         $data = new \stdClass();
 
