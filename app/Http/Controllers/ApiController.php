@@ -266,7 +266,23 @@ class ApiController extends Controller
         $refBy = 0;
 
         if(isset($request->refCode) && !empty($request->refCode)) {
-            $refBy = substr($request->refCode, 3);
+
+            $reffer = $request->refCode;
+
+            if($reffer[0] == 't') {
+
+                $reffer = substr($reffer, 1);
+
+                $host   = User::where('custom_ref', $reffer)->first();
+
+                $refBy = $host->id;
+
+            } else {
+
+                $refBy = substr($request->refCode, 3);
+
+            }
+
         }
 
         if(isset($request->pid) && !empty($request->pid)) {
