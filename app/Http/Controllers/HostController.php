@@ -106,8 +106,8 @@ class HostController extends Controller
         $total = DB::select($sqlTotal);
         $abonati = DB::select($sqlAbonati);
 
-        $data->total   = $total->total;
-        $data->abonati = $abonati->abonati;
+        $data->total   = $total;
+        $data->abonati = $abonati;
 
         return response()->json([
             "success" => true,
