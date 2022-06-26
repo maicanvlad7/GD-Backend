@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DashController;
 use App\Http\Controllers\HostController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +20,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('showCourses', [CourseController::class, 'showAllCourses']);
-Route::get('course/{id}', [CourseController::class, 'showCourseById']);
-Route::post('course/{id}', [CourseController::class, 'saveCourseAdmin']);
-Route::get('login', [CourseController::class, 'login']);
-Route::post('login', [CourseController::class, 'doLogin']);
+Route::get('dash', [DashController::class, 'index']);
+
+//LOGIN
+Route::get('login', [DashController::class, 'login']);
+Route::post('login', [DashController::class, 'doLogin']);
+
+//USERS
+Route::get('users', [DashController::class, 'showAllUsers']);
+Route::get('user/{id}', [DashController::class, 'showUser']);
+Route::post('user/{id}', [DashController::class, 'saveUser']);
+
+//COURSE
+Route::get('courses', [DashController::class, 'showAllCourses']);
+Route::get('course/{id}', [DashController::class, 'showCourse']);
+Route::post('course/{id}', [DashController::class, 'saveCourse']);
 

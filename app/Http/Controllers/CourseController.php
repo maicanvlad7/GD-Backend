@@ -220,66 +220,7 @@ class CourseController extends Controller
         ], 200);
     }
 
-//    for edit only
-    public function showAllCourses()
-    {
 
-        if( !Session::exists('logged_in') ) {
-            return Redirect::to('/login');
-        }
-
-        $courses = Course::all();
-
-        return view('courses', ["data" => $courses]);
-    }
-
-    public function showCourseById($id)
-    {
-        if( !Session::exists('logged_in') ) {
-            return Redirect::to('/login');
-        }
-
-        $course = new Course();
-
-        $courseData = $course::where('id', $id)->first();
-        $courseData = $courseData->getOriginal();
-
-        return view('edit_course', ["data" => $courseData]);
-
-
-    }
-
-    public function saveCourseAdmin(Request $request, $id)
-    {
-        if( !Session::exists('logged_in') ) {
-            return Redirect::to('/login');
-        }
-
-        $test = $request->all();
-
-        unset($test['_token']);
-        unset($test['submit']);
-
-        DB::table('courses')->where('id', $id)->update($test);
-    }
-
-    public function login()
-    {
-        return view('login');
-    }
-
-
-    public function doLogin(Request $request)
-    {
-
-        if($request->user == 'adminergd' && $request->pass == 'k9==KM-!F+xnKZ*a') {
-            Session::put('logged_in', 1);
-            return Redirect::to('showCourses');
-        }else{
-            die('parola gresita sau user ceva');
-        }
-
-    }
 
 
 }
