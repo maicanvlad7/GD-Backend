@@ -36,7 +36,7 @@
                             </div>
                             <div class="form-group mt-1">
                                 <label for="subtitle">Subtitlu</label>
-                                <input type="email" id="subtitle" class="form-control" name="subtitle" placeholder="Subtitlu" value="{{$data['subtitle']}}">
+                                <input type="text" id="subtitle" class="form-control" name="subtitle" placeholder="Subtitlu" value="{{$data['subtitle']}}">
                             </div>
                             <div class="form-group mt-1">
                                 <label for="description">Descriere</label>
