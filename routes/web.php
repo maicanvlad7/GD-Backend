@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('dash', [DashController::class, 'index']);
 
 //LOGIN
@@ -35,4 +36,11 @@ Route::post('user/{id}', [DashController::class, 'saveUser']);
 Route::get('courses', [DashController::class, 'showAllCourses']);
 Route::get('course/{id}', [DashController::class, 'showCourse']);
 Route::post('course/{id}', [DashController::class, 'saveCourse']);
+Route::get('add_course', [DashController::class, 'addCourse']);
+Route::post('add_course', [DashController::class, 'saveAddCourse']);
+
+Route::get('clessons/{id}', [DashController::class, 'getCourseLessons']);
+Route::get('deleteLesson/{id}', [DashController::class, 'deleteLesson']);
+Route::post('addLessonToCourse', [DashController::class, 'addLessonToCourse']);
+
 

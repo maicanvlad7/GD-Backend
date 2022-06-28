@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Course;
+use App\Models\Host;
+use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -137,5 +139,70 @@ class DashController extends Controller
             return redirect()->back()->with('message', 'Ati editat cu succes cursul ' . $course->name);
         }
 
+    }
+
+    public function addCourse()
+    {
+        $hosts = Host::select('name','id')->get();
+
+        return view('add_course', ["data" => $hosts]);
+    }
+
+    public function saveAddCourse(Request $request)
+    {
+        $course = new Course();
+
+        $course->category_id = $request->category_id;
+        $course->host = $request->host;
+        $course->name = $request->name;
+        $course->subtitle = $request->subtitle;
+        $course->description = $request->description;
+        $course->views = $request->views;
+        $course->image = $request->image;
+        $course->plan = $request->plan;
+        $course->length = $request->length;
+        $course->coming_soon = isset($request->coming_soon) ? 1 : 0;
+
+        if($course->save()) {
+            return redirect('/courses')->with('message', 'Ati adaugat cu succes ' . $course->name);
+        }
+
+
+    }
+
+    public function getCourseLessons($id)
+    {
+
+        $course_name = Course::select('name')->where('id', $id)->first();
+
+        $lessons = Lesson::where('course_id', $id)->get();
+
+        return view('course_lessons', ["data" => $lessons,"course_id" => $id, 'course_name' => $course_name]);
+    }
+
+    public function addLessonToCourse(Request $request)
+    {
+        $lesson = new Lesson();
+
+        $lesson->name = $request->name;
+        $lesson->video_id = $request->video_id;
+        $lesson->course_id = $request->course_id;
+        $lesson->length = $request->length;
+        $lesson->video_link = "https://player.vimeo.com/video/" . $lesson->video_id . "?h=e7389b8c2e";
+        $lesson->is_trailer = isset($request->is_trailer) ? 1 : 0;
+        $lesson->is_sample = isset($request->is_sample) ? 1 : 0;
+
+        if($lesson->save()) {
+            return redirect()->back()->with('message', 'Ati adaugat cu succes lectia ' . $lesson->name);
+        }
+    }
+
+    public function deleteLesson($id)
+    {
+        $lesson = Lesson::find($id);
+
+        if($lesson->delete()) {
+            return redirect()->back()->with('message', 'Ati sters lectia cu succes! ');
+        }
     }
 }
