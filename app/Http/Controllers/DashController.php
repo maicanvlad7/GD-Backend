@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Course;
 use App\Models\Host;
 use App\Models\Lesson;
+use App\Models\Resource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -203,6 +204,37 @@ class DashController extends Controller
 
         if($lesson->delete()) {
             return redirect()->back()->with('message', 'Ati sters lectia cu succes! ');
+        }
+    }
+
+    public function getCourseRes($id)
+    {
+        $course_name = Course::select('name')->where('id', $id)->first();
+
+        $res = Resource::where('course_id', $id)->get();
+
+        return view('course_res', ["data" => $res,"course_id" => $id, 'course_name' => $course_name]);
+    }
+
+    public function addResourceToCourse(Request $request)
+    {
+        $resource = new Resource();
+
+        $resource->name = $request->name;
+        $resource->course_id = $request->course_id;
+        $resource->link   = $request->link;
+
+        if($resource->save()) {
+            return redirect()->back()->with("message", "Resursa a fost adaugata cu succes!");
+        }
+    }
+
+    public function deleteResource($id)
+    {
+        $resource = Resource::find($id);
+
+        if($resource->delete()) {
+            return redirect()->back()->with('message', 'Ati sters resursa cu succes!');
         }
     }
 }

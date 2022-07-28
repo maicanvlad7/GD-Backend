@@ -43,4 +43,8 @@ Route::get('clessons/{id}', [DashController::class, 'getCourseLessons']);
 Route::get('deleteLesson/{id}', [DashController::class, 'deleteLesson']);
 Route::post('addLessonToCourse', [DashController::class, 'addLessonToCourse']);
 
+Route::get('cres/{id}', [DashController::class, 'getCourseRes']);
+Route::post('addResourceToCourse', [DashController::class, 'addResourceToCourse']);
+Route::get('deleteResource/{id}', [DashController::class, 'deleteResource']);
+
 

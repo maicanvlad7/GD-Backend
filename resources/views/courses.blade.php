@@ -75,6 +75,9 @@
                                                         <a class="dropdown-item" href="{{url('/clessons' . "/" . $u->id )}}">
                                                             <i class="bi bi-bell me-50"></i> Lectii
                                                         </a>
+                                                        <a class="dropdown-item" href="{{url('/cres' . "/" . $u->id )}}">
+                                                            <i class="bi bi-archive me-50"></i> Resurse
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </td>
