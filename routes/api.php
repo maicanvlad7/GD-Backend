@@ -9,6 +9,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PreferenceController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\ReviewController;
 use App\Models\Course;
 use Illuminate\Http\Request;
@@ -67,6 +68,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('getReferredCount', [ApiController::class, 'getReferred']);
     Route::post('updateLessonsProgress', [ProgressController::class, 'updateUserProgress']);
     Route::post('getNotesByCourseId', [NoteController::class, 'getByCourseId']);
+    Route::post('getResourcesByCourseId', [ResourceController::class, 'getByCourseId']);
     Route::post('getQuestionsByCourseId', [QuestionController::class, 'getAllByCourseId']);
     Route::post('addQuestionToCourse', [QuestionController::class, 'addQuestionToCourse']);
 

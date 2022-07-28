@@ -82,4 +82,17 @@ class ResourceController extends Controller
     {
         //
     }
+
+    function getByCourseId(Request $request)
+    {
+        $res = Resource::where('course_id', $request->course_id)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Resources found',
+            'data' => $res
+        ], Response::HTTP_OK);
+
+    }
 }
