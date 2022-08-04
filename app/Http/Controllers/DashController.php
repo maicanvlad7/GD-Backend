@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Host;
 use App\Models\Lesson;
 use App\Models\Resource;
+use App\Models\Story;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -235,6 +236,41 @@ class DashController extends Controller
 
         if($resource->delete()) {
             return redirect()->back()->with('message', 'Ati sters resursa cu succes!');
+        }
+    }
+
+    public function showAllStories()
+    {
+        if( !Session::exists('logged_in') ) {
+            return Redirect::to('/login');
+        }
+
+        $data = Story::all();
+
+        return view('stories', ["data" => $data]);
+    }
+
+    public function saveAddStory(Request $request)
+    {
+        $story = new Story();
+
+        foreach($request->input() as $key => $val) {
+            if($key != "_token") {
+                $story->$key = $val;
+            }
+        }
+
+        if($story->save()) {
+            return redirect()->back()->with("message", "Povestea a fost adaugata cu succes!");
+        }
+    }
+
+    public function deleteStory($id)
+    {
+        $story = Story::find($id);
+
+        if($story->delete()) {
+            return redirect()->back()->with('message', 'Ati sters povestea cu succes!');
         }
     }
 }

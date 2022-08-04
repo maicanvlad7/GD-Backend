@@ -11,6 +11,7 @@ use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\StoryController;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,15 @@ Route::post('crcfu', [ApiController::class, 'checkResetCode']);
 Route::post('surp', [ApiController::class, 'saveUserResetPassword']);
 
 Route::post('gmwc', [CourseController::class, 'getMostViewed']);
+
+//get stories for home page - limit to 10
+Route::post('gsfhp', [StoryController::class, 'getHomePageStories']);
+//get all success stories
+Route::post('gass', [StoryController::class, 'getAll']);
+//get success story by id
+Route::post('gssbi', [StoryController::class, 'getStoryById']);
+
+
 
 
 Route::group(['middleware' => ['jwt.verify']], function() {
