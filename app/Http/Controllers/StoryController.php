@@ -86,7 +86,7 @@ class StoryController extends Controller
 
     public function getHomePageStories()
     {
-        $stories =  Story::orderBy('id', 'desc')->take(5)->get();
+        $stories =  Story::orderBy('id', 'desc')->take(10)->get();
 
         return response()->json([
             "success" => true,
