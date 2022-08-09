@@ -297,6 +297,7 @@ class DashController extends Controller
 
         //set audio as default available 0
         $book->audio_av = 0;
+        $book->ideas    = "";
 
         if($book->save()) {
             return redirect()->back()->with("message", "Rezumatul cartii a fost adaugat cu succes!");
