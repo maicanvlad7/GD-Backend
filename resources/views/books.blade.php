@@ -14,44 +14,37 @@
             </header>
 
             <div class="page-heading">
-                <h3>Lectii pentru <strong class="text-danger">{{$course_name->name}}</strong></h3>
+                <h3>Rezumate Carti Gandeste Diferit</h3>
             </div>
             <div class="page-content">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <form action="{{url('addLessonToCourse')}}" method="post">
+                            <form action="{{url('addBook')}}" method="post">
                                 @csrf
-                                <input type="hidden" value="{{$course_id}}" name="course_id">
                                 <div class="row p-4">
-                                    <div class="col-md-4 ">
-                                        <label for="name">Nume Lectie</label>
-                                        <input type="text" class="form-control" name="name">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="video_id">Id Video(Vimeo)</label>
-                                        <input type="text" class="form-control" name="video_id">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="length">Durata Lectie</label>
-                                        <input type="text" class="form-control" name="length" placeholder="2:30">
-                                    </div>
-                                    <div class="col-md-12 d-flex">
-                                        <div class="form-check m-3">
-                                            <div class="checkbox">
-                                                <input type="checkbox" name="is_trailer" id="checkbox1" class="form-check-input" >
-                                                <label for="checkbox1">Trailer</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-check m-3">
-                                            <div class="checkbox">
-                                                <input type="checkbox" name="is_sample" id="checkbox2" class="form-check-input" >
-                                                <label for="checkbox2">Sample</label>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-6 ">
+                                        <label for="name">Nume Carte</label>
+                                        <input type="text" class="form-control" name="title">
                                     </div>
                                     <div class="col-md-6">
-                                        <button class="btn btn-success btn-xs" value="submit">Adauga Lectie</button>
+                                        <label for="length">Autor</label>
+                                        <input type="text" class="form-control" name="author">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="length">Timp Citire</label>
+                                        <input type="text" class="form-control" name="read_time">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="length">Link imagine cover</label>
+                                        <input type="text" class="form-control" name="img">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="length">Continut Carte (cum se vede aici si vede si in pagina)</label>
+                                        <textarea type="text" class="form-control" name="content" id="editor"></textarea>
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <button class="btn btn-success btn-xs" value="submit">Adauga Rezumat Carte</button>
                                     </div>
                                 </div>
                             </form>
@@ -71,24 +64,22 @@
                                 <table class="table table-striped" id="table1">
                                     <thead>
                                     <tr>
-                                        <th>Nume</th>
-                                        <th>ID Video (Vimeo)</th>
-                                        <th>Durata</th>
-                                        <th>Este Trailer</th>
-                                        <th>Este Sample</th>
+                                        <th>Id</th>
+                                        <th>Titlu Carte</th>
+                                        <th>Autor</th>
+                                        <th>Timp Citire</th>
                                         <th>Actiuni</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($data as $u)
                                         <tr>
-                                            <td>{{$u->name}}</td>
-                                            <td>{{$u->video_id}}</td>
-                                            <td>{{$u->length}}</td>
-                                            <td>{{$u->is_trailer}}</td>
-                                            <td>{{$u->is_sample}}</td>
+                                            <td>{{$u->id}}</td>
+                                            <td>{{$u->title}}</td>
+                                            <td>{{$u->author}}</td>
+                                            <td>{{$u->read_time}}</td>
                                             <td>
-                                                <a href="{{url('deleteLesson') . "/" . $u->id}}" class="btn btn-danger btn-xs">Sterge</a>
+                                                <a href="{{url('deleteBook') . "/" . $u->id}}" class="btn btn-danger btn-xs">Sterge</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -119,6 +110,17 @@
         // Simple Datatable
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#editor',
+            skin: 'bootstrap',
+            plugins: 'lists, link, image, media',
+            toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+            menubar: false,
+        });
     </script>
 
 @endsection

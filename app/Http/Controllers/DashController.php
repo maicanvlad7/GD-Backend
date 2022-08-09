@@ -194,6 +194,11 @@ class DashController extends Controller
         $lesson->is_trailer = isset($request->is_trailer) ? 1 : 0;
         $lesson->is_sample = isset($request->is_sample) ? 1 : 0;
 
+        var_dump($request->is_trailer);
+        var_dump($request->is_sample);
+        dd($lesson);
+        die();
+
         if($lesson->save()) {
             return redirect()->back()->with('message', 'Ati adaugat cu succes lectia ' . $lesson->name);
         }
@@ -271,6 +276,44 @@ class DashController extends Controller
 
         if($story->delete()) {
             return redirect()->back()->with('message', 'Ati sters povestea cu succes!');
+        }
+    }
+
+    public function showAllBooks()
+    {
+        if( !Session::exists('logged_in') ) {
+            return Redirect::to('/login');
+        }
+
+        $data = Book::all();
+
+        return view('books', ["data" => $data]);
+    }
+
+    public function saveAddBook(Request $request)
+    {
+        $book = new Book();
+
+        foreach($request->input() as $key => $val) {
+            if($key != "_token") {
+                $book->$key = $val;
+            }
+        }
+
+        //set audio as default available 0
+        $book->audio_av = 0;
+
+        if($book->save()) {
+            return redirect()->back()->with("message", "Rezumatul cartii a fost adaugat cu succes!");
+        }
+    }
+
+    public function deleteBook($id)
+    {
+        $book = Book::find($id);
+
+        if($book->delete()) {
+            return redirect()->back()->with('message', 'Ati sters rezumatul cartii cu succes!');
         }
     }
 }
