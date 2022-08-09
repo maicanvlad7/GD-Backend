@@ -194,11 +194,6 @@ class DashController extends Controller
         $lesson->is_trailer = isset($request->is_trailer) ? 1 : 0;
         $lesson->is_sample = isset($request->is_sample) ? 1 : 0;
 
-        var_dump($request->is_trailer);
-        var_dump($request->is_sample);
-        dd($lesson);
-        die();
-
         if($lesson->save()) {
             return redirect()->back()->with('message', 'Ati adaugat cu succes lectia ' . $lesson->name);
         }
