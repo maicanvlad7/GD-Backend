@@ -82,4 +82,15 @@ class NewsController extends Controller
     {
         //
     }
+
+    public function getAll()
+    {
+        $news = News::all();
+
+        return response()->json([
+            "success" => true,
+            "message" => "News found",
+            "data" => $news
+        ], 200);
+    }
 }

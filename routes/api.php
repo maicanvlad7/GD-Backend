@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\HostController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PreferenceController;
 use App\Http\Controllers\ProgressController;
@@ -44,6 +45,7 @@ Route::post('crcfu', [ApiController::class, 'checkResetCode']);
 Route::post('surp', [ApiController::class, 'saveUserResetPassword']);
 
 Route::post('gmwc', [CourseController::class, 'getMostViewed']);
+Route::post('getnews', [NewsController::class, 'getAll']);
 
 //get stories for home page - limit to 10
 Route::post('gsfhp', [StoryController::class, 'getHomePageStories']);
