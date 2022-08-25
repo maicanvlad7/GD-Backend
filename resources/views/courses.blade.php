@@ -34,11 +34,9 @@
                                     <thead>
                                     <tr>
                                         <th>Nume</th>
-                                        <th>Subtitlu</th>
-                                        <th>Descriere</th>
                                         <th>Durata</th>
+                                        <th>Scor</th>
                                         <th>Imagine (link bunny)</th>
-                                        <th>Abonament</th>
                                         <th>Vizualizari</th>
                                         <th>Actiuni</th>
                                     </tr>
@@ -47,21 +45,9 @@
                                     @foreach($data as $u)
                                         <tr>
                                             <td>{{$u->name}}</td>
-                                            <td>{{$u->subtitle}}</td>
-                                            <td>{{$u->description}}</td>
                                             <td>{{$u->length}}</td>
+                                            <td>{{$u->score}}</td>
                                             <td>{{$u->image}}</td>
-                                            <td>
-                                                @if($u->plan == '1')
-                                                    basic
-                                                @elseif($u->plan == '2')
-                                                    pro
-                                                @elseif($u->plan == '3')
-                                                    full
-                                                @else
-                                                    -
-                                                @endif
-                                            </td>
                                             <td>{{$u->views}}</td>
                                             <td>
                                                 <div class="dropdown">

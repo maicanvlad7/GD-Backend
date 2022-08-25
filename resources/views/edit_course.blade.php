@@ -44,15 +44,33 @@
                                     {{$data['description']}}
                                 </textarea>
                             </div>
+{{--                            <div class="form-group mt-1">--}}
+{{--                                <label for="subtitle">Scor (ajuta la ordonare)</label>--}}
+{{--                                <input type="text" id="score" class="form-control" name="score" placeholder="Scor" value="{{$data['score']}}">--}}
+{{--                            </div>--}}
+                            <div class="form-group mt-1">
+                                <label for="subtitle">Cover</label>
+                                <input type="text" id="image" class="form-control" name="image" placeholder="Imagine Cover" value="{{$data['image']}}">
+                            </div>
                             <div class="form-group mt-1">
                                 <label for="views">Vizualizari</label>
                                 <input type="text" id="views" class="form-control" name="views" placeholder="Vizualizari" value="{{$data['views']}}">
                             </div>
                             <div class="form-group mt-1">
+                                <label for="views">Scor (ajuta la ordonarea in categorie)</label>
+                                <input type="text" id="score" class="form-control" name="score" placeholder="Scor" value="{{$data['score']}}">
+                            </div>
+                            <div class="form-group mt-1">
                                 <label for="length">Durata</label>
                                 <input type="text" id="length" class="form-control" name="length" placeholder="Customer ID" value="{{$data['length']}}">
                             </div>
-                            <button class="btn btn-primary btn-xs mt-2">Salvează</button>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="coming_soon" id="flexCheckDefault" {{$data['coming_soon'] == 1 ? 'checked' : ''}}>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Coming Soon
+                                </label>
+                            </div>
+                            <button class="btn btn-primary btn-xs mt-4">Salvează</button>
                         </form>
                     </div>
                 </div>

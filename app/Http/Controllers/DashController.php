@@ -132,10 +132,13 @@ class DashController extends Controller
         $course = Course::where("id", $id)->first();
 
         $course->name = $request->name;
+        $course->score = $request->score;
+        $course->image = $request->image;
         $course->description = $request->description;
         $course->subtitle = $request->subtitle;
         $course->length = $request->length;
         $course->views = $request->views;
+        $course->coming_soon = $request->coming_soon == "on" ? 1 : 0;
 
         if($course->save()) {
             return redirect()->back()->with('message', 'Ati editat cu succes cursul ' . $course->name);
