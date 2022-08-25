@@ -49,6 +49,12 @@
                         <span>Rezumate carti</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->is('new*') ? 'active' : ''}}">
+                    <a href="{{url('news')}}" class='sidebar-link'>
+                        <i class="bi bi-arrow-left-right"></i>
+                        <span>News Carousel</span>
+                    </a>
+                </li>
 
             </ul>
         </div>

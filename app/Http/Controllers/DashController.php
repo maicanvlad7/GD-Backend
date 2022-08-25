@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Course;
 use App\Models\Host;
 use App\Models\Lesson;
+use App\Models\News;
 use App\Models\Resource;
 use App\Models\Story;
 use App\Models\User;
@@ -343,6 +344,34 @@ class DashController extends Controller
 
         if($book->delete()) {
             return redirect()->back()->with('message', 'Ati sters rezumatul cartii cu succes!');
+        }
+    }
+
+    public function news()
+    {
+        $news = News::all();
+
+        return view('news', ["data" => $news]);
+    }
+
+    public function addNews(Request $request)
+    {
+        $news = new News();
+
+        $news->image = $request->image;
+        $news->link = $request->link;
+
+        if($news->save()) {
+            return redirect()->back()->with("message", "NEWS adaugate cu succes.");
+        }
+    }
+
+    public function deleteNews($id)
+    {
+        $news = News::find($id);
+
+        if($news->delete()) {
+            return redirect()->back()->with('message', 'Ati sters NEWS cu succes!');
         }
     }
 }
