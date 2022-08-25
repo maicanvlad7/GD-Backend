@@ -53,6 +53,8 @@ Route::get('deleteStory/{id}', [DashController::class, 'deleteStory']);
 
 Route::get('books', [DashController::class, 'showAllBooks']);
 Route::post('addBook', [DashController::class, 'saveAddBook']);
+Route::get('bookEdit/{id}', [DashController::class, 'showBook']);
+Route::post('saveBookEdit/{id}', [DashController::class, 'saveBookEdit']);
 Route::get('deleteBook/{id}', [DashController::class, 'deleteBook']);
 
 

@@ -79,6 +79,7 @@
                                             <td>{{$u->author}}</td>
                                             <td>{{$u->read_time}}</td>
                                             <td>
+                                                <a href="{{url('bookEdit') . "/" . $u->id}}" class="btn btn-primary btn-xs">Editare</a>
                                                 <a href="{{url('deleteBook') . "/" . $u->id}}" class="btn btn-danger btn-xs">Sterge</a>
                                             </td>
                                         </tr>

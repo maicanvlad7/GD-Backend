@@ -43,7 +43,7 @@
                         <span>Povești de succes</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ request()->is('books*') ? 'active' : ''}}">
+                <li class="sidebar-item {{ request()->is('book*') ? 'active' : ''}}">
                     <a href="{{url('books')}}" class='sidebar-link'>
                         <i class="bi bi-book"></i>
                         <span>Rezumate carti</span>

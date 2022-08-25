@@ -288,6 +288,33 @@ class DashController extends Controller
         return view('books', ["data" => $data]);
     }
 
+    public function showBook($id)
+    {
+        $book = Book::find($id);
+
+        $book = Book::where('id', $id)->first();
+        $book = $book->getOriginal();
+
+        return view('edit_book', ["data" => $book]);
+    }
+
+    public function saveBookEdit(Request $request, $id)
+    {
+        $looper = $request->all();
+
+        $book = Book::where('id', $id)->first();
+
+        foreach($looper as $key=>$val) {
+           if($key != "_token") {
+               $book->$key = $val;
+           }
+        }
+
+        if($book->save()) {
+            return redirect()->back()->with('message', 'Ati editat cu succes rezumatul ' . $book->title);
+        }
+    }
+
     public function saveAddBook(Request $request)
     {
         $book = new Book();
