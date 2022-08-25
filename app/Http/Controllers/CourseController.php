@@ -93,7 +93,7 @@ class CourseController extends Controller
 
     public function getRecommended()
     {
-        $courses = Course::inRandomOrder()->limit(5)->get();
+        $courses = Course::where('coming_soon', 0)->inRandomOrder()->limit(5)->get();
 
         foreach ($courses as $co) {
             $co->hoster = Host::find($co->host);
