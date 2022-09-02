@@ -44,6 +44,7 @@ class ApiController extends Controller
                 'discounts' => [[
                     'coupon' => strtoupper($request->dc),
                 ]],
+                'tax_id_collection' => ['enabled' => true],
                 'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
                 'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
             ]);
