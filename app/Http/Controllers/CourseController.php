@@ -220,6 +220,18 @@ class CourseController extends Controller
         ], 200);
     }
 
+    public function getComingSoon()
+    {
+        $courses = Course::select('id','image','name')->where('coming_soon','1')->get();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Coming soon courses found",
+            "data" => $courses
+        ], 200);
+
+    }
+
 
 
 

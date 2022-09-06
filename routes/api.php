@@ -45,6 +45,7 @@ Route::post('crcfu', [ApiController::class, 'checkResetCode']);
 Route::post('surp', [ApiController::class, 'saveUserResetPassword']);
 
 Route::post('gmwc', [CourseController::class, 'getMostViewed']);
+Route::post('gcs', [CourseController::class, 'getComingSoon']);
 Route::post('getnews', [NewsController::class, 'getAll']);
 
 //get stories for home page - limit to 10
