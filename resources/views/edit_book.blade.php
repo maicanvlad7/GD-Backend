@@ -28,6 +28,17 @@
                         <form action="{{url('saveBookEdit/' . $data['id'])}}" method="post">
                             @csrf
                             <div class="row p-4">
+                                <div class="col-md-12">
+                                    <p style="color: red; font-size:14px; font-style: italic">Daca are audio se va completa cu 1 si link din bunny. Nu functioneaza fara sa fie audioAv = 1 indiferent de link</p>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="name">Audio disponibil (0 = nu are / 1 = are audio)</label>
+                                    <input type="text" class="form-control" name="audio_av" value="{{$data['audio_av']}}">
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="name">Link Bunny Audio</label>
+                                    <input type="text" class="form-control" name="audio_path" value="{{$data['audio_path']}}">
+                                </div>
                                 <div class="col-md-6 mt-2">
                                     <label for="name">Nume Carte</label>
                                     <input type="text" class="form-control" name="title" value="{{$data['title']}}">
