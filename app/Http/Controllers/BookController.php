@@ -85,7 +85,7 @@ class BookController extends Controller
 
     public function getAllBooks()
     {
-        $books = Book::select('id','title','author','read_time','img')->orderBy('id','DESC')->get();
+        $books = Book::select('id','title','author','read_time','img', 'audio_av')->orderBy('id','DESC')->get();
 
         return response()->json([
             "success" => true,
