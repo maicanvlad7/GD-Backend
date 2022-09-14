@@ -32,6 +32,13 @@ Route::get('users', [DashController::class, 'showAllUsers']);
 Route::get('user/{id}', [DashController::class, 'showUser']);
 Route::post('user/{id}', [DashController::class, 'saveUser']);
 
+//TEACHERS
+Route::get('teachers', [DashController::class, 'showAllTeachers']);
+Route::get('teacher/{id}', [DashController::class, 'showTeacher']);
+Route::post('add_teacher', [DashController::class, 'addTeacher']);
+Route::post('teacher/{id}', [DashController::class, 'saveTeacher']);
+
+
 //COURSE
 Route::get('courses', [DashController::class, 'showAllCourses']);
 Route::get('course/{id}', [DashController::class, 'showCourse']);

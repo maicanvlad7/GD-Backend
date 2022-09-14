@@ -55,6 +55,12 @@
                         <span>News Carousel</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->is('teacher*') ? 'active' : ''}}">
+                    <a href="{{url('teachers')}}" class='sidebar-link'>
+                        <i class="bi bi-award"></i>
+                        <span>Teachers</span>
+                    </a>
+                </li>
 
             </ul>
         </div>

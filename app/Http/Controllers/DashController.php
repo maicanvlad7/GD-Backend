@@ -59,6 +59,61 @@ class DashController extends Controller
 
     }
 
+    public function showAllTeachers()
+    {
+        if( !Session::exists('logged_in') ) {
+            return Redirect::to('/login');
+        }
+
+        $teachers = Host::all();
+
+        return view('teachers', ["data" => $teachers]);
+    }
+
+    public function showTeacher($id)
+    {
+        if( !Session::exists('logged_in') ) {
+            return Redirect::to('/login');
+        }
+
+        $host = new Host();
+
+        $hostData = $host::where('id', $id)->first();
+        $hostData = $hostData->getOriginal();
+
+        return view('edit_teacher', ["host" => $hostData]);
+    }
+
+    public function saveTeacher(Request $request, $id)
+    {
+
+        $host = Host::where("id", $id)->first();
+
+        $host->name = $request->name;
+        $host->title = $request->title;
+        $host->description = $request->description;
+        $host->image = $request->image;
+
+        if($host->save()) {
+            return redirect()->back()->with('message', 'Ati editat cu succes teacher-ul ' . $host->name);
+        }
+
+    }
+
+    public function addTeacher(Request $request)
+    {
+        $host = new Host();
+
+        $host->name = $request->name;
+        $host->title = $request->title;
+        $host->description = $request->description;
+        $host->image = $request->image;
+
+        if($host->save()) {
+            return redirect()->back()->with('message', 'Ati adaugat cu succes teacher-ul' . $host->name );
+        }
+    }
+
 //    USER
     public function showAllUsers()
     {
@@ -70,6 +125,8 @@ class DashController extends Controller
 
         return view('users', ["data" => $users]);
     }
+
+
 
     public function showUser($id)
     {
