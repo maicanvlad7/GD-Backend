@@ -97,4 +97,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('gcbhi', [CourseController::class, 'getCoursesByHost']);
 
     Route::post('ghrd', [HostController::class, 'getRefByHost']);
+
+    Route::post('cpbugd', [ApiController::class, 'changePassByUser']);
 });

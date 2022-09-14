@@ -45,6 +45,7 @@ class ApiController extends Controller
                     'coupon' => strtoupper($request->dc),
                 ]],
                 'tax_id_collection' => ['enabled' => true],
+                'locale' => 'ro',
                 'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
                 'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
             ]);
@@ -57,6 +58,7 @@ class ApiController extends Controller
                 ]],
                 'mode' => 'subscription',
                 'tax_id_collection' => ['enabled' => true],
+                'locale' => 'ro',
                 'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
                 'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
             ]);
@@ -440,5 +442,26 @@ class ApiController extends Controller
         }
 
 
+    }
+
+    public function changePassByUser(Request $request)
+    {
+        $user = JWTAuth::authenticate($request->bearerToken());
+
+        $user = User::where('id', $user->id)->first();
+
+        $user->password =  bcrypt($request->password);
+
+        if($user->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Parola a fost schimbată cu succes'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'A apărut o eroare. Vă rugăm să încercați din nou!'
+            ], 200);
+        }
     }
 }
