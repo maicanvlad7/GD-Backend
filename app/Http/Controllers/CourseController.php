@@ -222,7 +222,7 @@ class CourseController extends Controller
 
     public function getComingSoon()
     {
-        $courses = Course::select('id','image','name')->where('coming_soon','1')->get();
+        $courses = Course::select('id','image','name','cktag')->where('coming_soon','1')->get();
 
         return response()->json([
             "success" => true,
