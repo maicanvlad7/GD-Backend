@@ -196,6 +196,7 @@ class DashController extends Controller
         $course->subtitle = $request->subtitle;
         $course->length = $request->length;
         $course->views = $request->views;
+        $course->cktag = $request->cktag;
         $course->coming_soon = $request->coming_soon == "on" ? 1 : 0;
 
         if($course->save()) {

@@ -57,6 +57,10 @@
                                 <input type="text" id="views" class="form-control" name="views" placeholder="Vizualizari" value="{{$data['views']}}">
                             </div>
                             <div class="form-group mt-1">
+                                <label for="cktag">Tag Convert Kit</label>
+                                <input type="number" id="cktag" class="form-control" name="cktag" placeholder="Tag Convert Kit" value="{{$data['cktag']}}">
+                            </div>
+                            <div class="form-group mt-1">
                                 <label for="views">Scor (ajuta la ordonarea in categorie)</label>
                                 <input type="text" id="score" class="form-control" name="score" placeholder="Scor" value="{{$data['score']}}">
                             </div>
