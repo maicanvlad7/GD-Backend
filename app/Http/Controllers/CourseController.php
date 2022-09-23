@@ -151,7 +151,7 @@ class CourseController extends Controller
         $course->hoster = Host::find($course->host);
 
         foreach($course->reviews as $cr) {
-            $review_user = User::select(['name','email'])->where('id', $cr->user_id)->first();
+            $review_user = User::select(['name','email','level'])->where('id', $cr->user_id)->first();
             $cr->user = $review_user;
         }
 
