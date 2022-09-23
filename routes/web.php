@@ -38,6 +38,12 @@ Route::get('teacher/{id}', [DashController::class, 'showTeacher']);
 Route::post('add_teacher', [DashController::class, 'addTeacher']);
 Route::post('teacher/{id}', [DashController::class, 'saveTeacher']);
 
+//COMMENTS
+Route::get('comments', [DashController::class, 'showAllComments']);
+Route::post('addFakeUser', [DashController::class, 'addFakeUser']);
+Route::post('addFakeComment', [DashController::class, 'addFakeComment']);
+Route::get('deleteReview/{id}', [DashController::class, 'deleteReview']);
+
 
 //COURSE
 Route::get('courses', [DashController::class, 'showAllCourses']);

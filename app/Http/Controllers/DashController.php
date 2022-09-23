@@ -8,6 +8,7 @@ use App\Models\Host;
 use App\Models\Lesson;
 use App\Models\News;
 use App\Models\Resource;
+use App\Models\Review;
 use App\Models\Story;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -57,6 +58,62 @@ class DashController extends Controller
             die('parola gresita sau user ceva');
         }
 
+    }
+
+    public function showAllComments()
+    {
+        $sql = "SELECT courses.name AS cname, users.name AS uname, users.email, reviews.* FROM reviews
+                INNER JOIN users ON users.id = reviews.user_id
+                INNER JOIN courses ON courses.id = reviews.course_id";
+
+        $result = DB::select($sql);
+
+        $users = User::where('is_bot', 1)->get();
+        $courses = Course::all();
+
+        return view('comments', ["data" => $result,"users"=>$users,"courses"=>$courses]);
+
+    }
+
+    public function addFakeUser(Request $request)
+    {
+        $user = new User();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt('test12345');
+        $user->referred_by = 0;
+        $user->is_bot = 1;
+        $user->active = 1;
+
+        if($user->save()) {
+            return redirect()->back()->with('message', 'Ati adaugat cu succes userul ' . $user->name);
+        }
+
+
+    }
+
+    public function addFakeComment(Request $request)
+    {
+        $rev = new Review();
+
+        $rev->user_id = $request->user_id;
+        $rev->course_id = $request->course_id;
+        $rev->content    = $request->con;
+        $rev->rating = 5;
+
+        if($rev->save()) {
+            return redirect()->back()->with('message', 'Ati adaugat cu succes comentariul');
+        }
+    }
+
+    public function deleteReview($id)
+    {
+        $rev = Review::find($id);
+
+        if($rev->delete()) {
+            return redirect()->back()->with('message', 'Ati sters comentariul cu succes!');
+        }
     }
 
     public function showAllTeachers()

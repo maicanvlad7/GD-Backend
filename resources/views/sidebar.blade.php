@@ -61,6 +61,12 @@
                         <span>Teachers</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->is('comment*') ? 'active' : ''}}">
+                    <a href="{{url('comments')}}" class='sidebar-link'>
+                        <i class="bi bi-chat-quote"></i>
+                        <span>Comments</span>
+                    </a>
+                </li>
 
             </ul>
         </div>
