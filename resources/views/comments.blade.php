@@ -103,7 +103,7 @@
                                     @foreach($data as $u)
                                         <tr>
                                             <td>{{$u->id}}</td>
-                                            <td>{{$u->uname}}</td>
+                                            <td>{{$u->uname}} - {{$u->level}}</td>
                                             <td>{{$u->cname}}</td>
                                             <td>{{$u->content}}</td>
                                             <td>
