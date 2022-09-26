@@ -62,7 +62,7 @@ class DashController extends Controller
 
     public function showAllComments()
     {
-        $sql = "SELECT courses.name AS cname, users.name AS uname, users.email, reviews.* FROM reviews
+        $sql = "SELECT courses.name AS cname, users.name AS uname, users.email, users.level as ulevel,  reviews.* FROM reviews
                 INNER JOIN users ON users.id = reviews.user_id
                 INNER JOIN courses ON courses.id = reviews.course_id";
 
