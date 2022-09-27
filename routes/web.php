@@ -76,5 +76,10 @@ Route::get('news', [DashController::class, 'news']);
 Route::post('addNews', [DashController::class, 'addNews']);
 Route::get('deleteNews/{id}', [DashController::class, 'deleteNews']);
 
+//CRONS
+Route::get('avfec', [DashController::class, 'addViewsToCourses']);
+
+
+
 
 

@@ -514,4 +514,14 @@ class DashController extends Controller
             return redirect()->back()->with('message', 'Ati sters NEWS cu succes!');
         }
     }
+
+    public function addViewsToCourses()
+    {
+        $sql = "UPDATE courses SET views = views + 125";
+
+        DB::select($sql);
+
+        return 0;
+
+    }
 }
