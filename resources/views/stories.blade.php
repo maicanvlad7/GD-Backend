@@ -83,6 +83,7 @@
                                             <td>{{$u->role}}</td>
                                             <td>{{$u->excerpt}}</td>
                                             <td>
+                                                <a href="{{url('editStory') . "/" . $u->id}}" class="btn btn-info btn-xs">Edit</a>
                                                 <a href="{{url('deleteStory') . "/" . $u->id}}" class="btn btn-danger btn-xs">Sterge</a>
                                             </td>
                                         </tr>

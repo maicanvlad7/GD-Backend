@@ -61,6 +61,8 @@ Route::post('addResourceToCourse', [DashController::class, 'addResourceToCourse'
 Route::get('deleteResource/{id}', [DashController::class, 'deleteResource']);
 
 Route::get('stories', [DashController::class, 'showAllStories']);
+Route::get('editStory/{id}', [DashController::class, 'editStory']);
+Route::post('saveStoryEdit/{id}', [DashController::class, 'saveStoryEdit']);
 Route::post('addStory', [DashController::class, 'saveAddStory']);
 Route::get('deleteStory/{id}', [DashController::class, 'deleteStory']);
 

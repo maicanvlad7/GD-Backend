@@ -385,6 +385,30 @@ class DashController extends Controller
         }
     }
 
+    public function editStory($id)
+    {
+        $story = Story::find($id);
+
+        return view('edit_story', ["data" => $story]);
+
+    }
+
+    public function saveStoryEdit(Request $request, $id)
+    {
+        $story = Story::where('id', $id)->first();
+
+        $story->title = $request->title;
+        $story->excerpt = $request->excerpt;
+        $story->description = $request->description;
+        $story->author = $request->author;
+        $story->role = $request->role;
+        $story->cover = $request->cover;
+
+        if($story->save()) {
+            return redirect()->back()->with("message", "Povestea ".$story->title." a fost editata cu succes!");
+        }
+    }
+
     public function deleteStory($id)
     {
         $story = Story::find($id);
