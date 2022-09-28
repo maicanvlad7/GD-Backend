@@ -85,7 +85,7 @@ class PayoutController extends Controller
 
     public function markAsRequested(Request $request)
     {
-        $payout = Payout::where('user_id', $request->uid)->get();
+        $payout = Payout::where('user_id', $request->uid)->first();
 
         $payout->requested = 1;
 
