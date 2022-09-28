@@ -68,6 +68,7 @@
                                 <table class="table table-striped" id="table1">
                                     <thead>
                                     <tr>
+                                        <th>Scor</th>
                                         <th>Titlu Poveste</th>
                                         <th>Autor</th>
                                         <th>Rol</th>
@@ -78,6 +79,7 @@
                                     <tbody>
                                     @foreach($data as $u)
                                         <tr>
+                                            <td>{{$u->score}}</td>
                                             <td>{{$u->title}}</td>
                                             <td>{{$u->author}}</td>
                                             <td>{{$u->role}}</td>

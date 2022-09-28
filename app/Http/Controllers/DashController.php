@@ -404,6 +404,7 @@ class DashController extends Controller
         $story->author = $request->author;
         $story->role = $request->role;
         $story->cover = $request->cover;
+        $story->score = $request->score;
 
         if($story->save()) {
             return redirect()->back()->with("message", "Povestea ".$story->title." a fost editata cu succes!");

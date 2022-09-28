@@ -32,6 +32,10 @@
                                     <label for="title">Nume poveste</label>
                                     <input type="text" class="form-control" name="title" value="{{$data['title']}}">
                                 </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="score">Scor poveste (ordonare purpose)</label>
+                                    <input type="text" class="form-control" name="score" value="{{$data['score']}}">
+                                </div>
                                 <div class="col-md-12 mt-2">
                                     <label for="excerpt">Descriere scurta (apare pe card)</label>
                                     <textarea type="text" class="form-control" name="excerpt">{{$data['excerpt']}}</textarea>
