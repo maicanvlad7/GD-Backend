@@ -67,6 +67,12 @@
                         <span>Comments</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->is('payout*') ? 'active' : ''}}">
+                    <a href="{{url('payouts')}}" class='sidebar-link'>
+                        <i class="bi bi-cash-stack"></i>
+                        <span>Payouts</span>
+                    </a>
+                </li>
 
             </ul>
         </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\HostController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\PayoutController;
 use App\Http\Controllers\PreferenceController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\QuestionController;
@@ -101,4 +102,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('cpbugd', [ApiController::class, 'changePassByUser']);
 
     Route::post('atss', [ApiController::class, 'addTagToSub']);
+
+    Route::post('request_payout', [PayoutController::class, 'markAsRequested']);
+    Route::post('get_my_payout', [PayoutController::class, 'getByUserId']);
 });

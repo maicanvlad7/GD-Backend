@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Host;
 use App\Models\Lesson;
 use App\Models\News;
+use App\Models\Payout;
 use App\Models\Resource;
 use App\Models\Review;
 use App\Models\Story;
@@ -523,5 +524,47 @@ class DashController extends Controller
 
         return 0;
 
+    }
+
+    public function payouts()
+    {
+        $teachers = User::select(['id','name','email'])->where('isHost', 1)->get();
+
+        $sql = "SELECT users.name, users.id as uid, payouts.* FROM payouts INNER JOIN users ON users.id = payouts.user_id";
+
+        $payouts = DB::select($sql);
+
+        return view('payouts', ["teachers" => $teachers, "payouts" => $payouts]);
+    }
+
+    public function addPayout(Request $request)
+    {
+        $payout = Payout::updateOrCreate(
+            ['user_id' => $request->user_id],
+            ['amount' => $request->amount]
+        );
+
+        if($payout) {
+            return redirect()->back()->with('message', 'Payout adaugat cu succes!');
+        }
+    }
+
+    public function editPayout($id)
+    {
+        $payout = Payout::find($id);
+
+        return view('edit_payout', ["payout" => $payout]);
+
+    }
+
+    public function savePayoutEdit(Request $request, $id)
+    {
+        $payout = Payout::find($id);
+
+        $payout->amount = $request->amount;
+
+        if($payout->save()) {
+            return redirect('/payouts')->with('message', 'Payout editat cu succes!');
+        }
     }
 }

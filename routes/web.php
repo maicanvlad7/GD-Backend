@@ -60,21 +60,30 @@ Route::get('cres/{id}', [DashController::class, 'getCourseRes']);
 Route::post('addResourceToCourse', [DashController::class, 'addResourceToCourse']);
 Route::get('deleteResource/{id}', [DashController::class, 'deleteResource']);
 
+//STORIES
 Route::get('stories', [DashController::class, 'showAllStories']);
 Route::get('editStory/{id}', [DashController::class, 'editStory']);
 Route::post('saveStoryEdit/{id}', [DashController::class, 'saveStoryEdit']);
 Route::post('addStory', [DashController::class, 'saveAddStory']);
 Route::get('deleteStory/{id}', [DashController::class, 'deleteStory']);
 
+//BOOKS
 Route::get('books', [DashController::class, 'showAllBooks']);
 Route::post('addBook', [DashController::class, 'saveAddBook']);
 Route::get('bookEdit/{id}', [DashController::class, 'showBook']);
 Route::post('saveBookEdit/{id}', [DashController::class, 'saveBookEdit']);
 Route::get('deleteBook/{id}', [DashController::class, 'deleteBook']);
 
+//NEWS
 Route::get('news', [DashController::class, 'news']);
 Route::post('addNews', [DashController::class, 'addNews']);
 Route::get('deleteNews/{id}', [DashController::class, 'deleteNews']);
+
+//PAYOUTS
+Route::get('payouts', [DashController::class, 'payouts']);
+Route::post('addPayout', [DashController::class, 'addPayout']);
+Route::get('editPayout/{id}', [DashController::class, 'editPayout']);
+Route::post('savePayoutEdit/{id}', [DashController::class, 'savePayoutEdit']);
 
 //CRONS
 Route::get('avfec', [DashController::class, 'addViewsToCourses']);
