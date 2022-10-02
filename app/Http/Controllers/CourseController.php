@@ -108,9 +108,9 @@ class CourseController extends Controller
         $courses = Course::where('coming_soon', 0)->where('id',' !=',$cid)->where('category_id', $current_category)->inRandomOrder()->limit(5)->toSql();
         $dump->d = $courses;
 
-        foreach ($courses as $co) {
-            $co->hoster = Host::find($co->host);
-        }
+//        foreach ($courses as $co) {
+//            $co->hoster = Host::find($co->host);
+//        }
 
         return response()->json([
             "success" => true,
