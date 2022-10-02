@@ -233,7 +233,7 @@ class CourseController extends Controller
 
     }
 
-    public function guvs(Request $request)
+    public function getUserVideoStats(Request $request)
     {
         $uid = $request->user_id;
 
