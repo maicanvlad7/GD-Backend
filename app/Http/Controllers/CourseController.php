@@ -99,6 +99,11 @@ class CourseController extends Controller
         $current_course = Course::where('id', $cid)->first();
         $current_category = $current_course->category_id;
 
+        $dump = new \stdClass();
+        $dump->a = $cid;
+        $dump->b = $current_course;
+        $dump->c = $current_category;
+
         //get recommended from same category but not current course
         $courses = Course::where('coming_soon', 0)->where('id',' !=',$cid)->where('category_id', $current_category)->inRandomOrder()->limit(5)->get();
 
@@ -109,7 +114,7 @@ class CourseController extends Controller
         return response()->json([
             "success" => true,
             "message" => "Courses recommended found",
-            "data" => $courses
+            "data" => $dump
         ], 200);
 
 
