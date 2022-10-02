@@ -92,9 +92,15 @@ class CourseController extends Controller
         //
     }
 
-    public function getRecommended()
+    public function getRecommended(Request $request)
     {
-        $courses = Course::where('coming_soon', 0)->inRandomOrder()->limit(5)->get();
+        //get category of current course
+        $cid = $request->course_id;
+        $current_course = Course::where('id', $cid)->first();
+        $current_category = $current_course->category_id;
+
+        //get recommended from same category but not current course
+        $courses = Course::where('coming_soon', 0)->where('id !=',$cid)->where('category_id', $current_category)->inRandomOrder()->limit(5)->get();
 
         foreach ($courses as $co) {
             $co->hoster = Host::find($co->host);
