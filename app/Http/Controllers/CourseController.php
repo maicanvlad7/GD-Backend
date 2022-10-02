@@ -106,6 +106,7 @@ class CourseController extends Controller
 
         //get recommended from same category but not current course
         $courses = Course::where('coming_soon', 0)->where('id',' !=',$cid)->where('category_id', $current_category)->inRandomOrder()->limit(5)->get();
+        $dump->d = $courses;
 
         foreach ($courses as $co) {
             $co->hoster = Host::find($co->host);
