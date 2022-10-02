@@ -105,7 +105,7 @@ class CourseController extends Controller
         $dump->c = $current_category;
 
         //get recommended from same category but not current course
-        $courses = Course::where('coming_soon', 0)->where('id',' !=',$cid)->where('category_id', $current_category)->inRandomOrder()->limit(5)->get();
+        $courses = Course::where('coming_soon', 0)->where('id',' !=',$cid)->where('category_id', $current_category)->inRandomOrder()->limit(5)->toSql();
         $dump->d = $courses;
 
         foreach ($courses as $co) {
