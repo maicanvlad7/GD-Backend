@@ -105,4 +105,5 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     Route::post('request_payout', [PayoutController::class, 'markAsRequested']);
     Route::post('get_my_payout', [PayoutController::class, 'getByUserId']);
+    Route::post('guvs', [CourseController::class, 'getUserVideoStats']);
 });

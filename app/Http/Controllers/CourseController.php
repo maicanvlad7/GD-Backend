@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Lesson;
 use App\Models\Review;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -228,6 +229,47 @@ class CourseController extends Controller
             "success" => true,
             "message" => "Coming soon courses found",
             "data" => $courses
+        ], 200);
+
+    }
+
+    public function guvs(Request $request)
+    {
+        $uid = $request->user_id;
+
+        if(!$uid) return 0;
+
+        //started courses
+        $wnSql = "SELECT course_id FROM progress WHERE user_id = $uid GROUP BY course_id";
+        $wn = DB::select($wnSql);
+
+        $completed = 0;
+
+        foreach ($wn as $w) {
+            //num lessons SQL
+            $nl = Lesson::where('course_id', $w->course_id)->where('is_trailer',0)->count();
+
+            //see how many lessons from course user has finished
+            $fl = Progress::select('id')
+                ->where('user_id', $uid)
+                ->where('course_id',$w->course_id)
+                ->where('completed',1)
+                ->count();
+
+            if($fl == $nl) {
+                $completed += 1;
+            }
+        }
+
+        $res = new \stdClass();
+
+        $res->watching = $wn;
+        $res->completed = $completed;
+
+        return response()->json([
+            "success" => true,
+            "message" => "Got user progress",
+            "data" => $res
         ], 200);
 
     }
