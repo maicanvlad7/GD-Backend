@@ -51,6 +51,10 @@
                                     <label for="length">Timp Citire (minute)</label>
                                     <input type="text" class="form-control" name="read_time" value="{{$data['read_time']}}">
                                 </div>
+                                <div class="col-md-6 mt-2">
+                                    <label for="score">Scor (ajuta la ordonare in pagina de carti)</label>
+                                    <input type="text" class="form-control" name="score" value="{{$data['score']}}">
+                                </div>
                                 <div class="col-md-12 mt-2">
                                     <label for="length">Link imagine cover</label>
                                     <input type="text" class="form-control" name="img" value="{{$data['img']}}">

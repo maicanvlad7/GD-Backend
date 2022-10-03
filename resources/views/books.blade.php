@@ -35,6 +35,10 @@
                                         <label for="length">Timp Citire</label>
                                         <input type="text" class="form-control" name="read_time">
                                     </div>
+                                    <div class="col-md-6">
+                                        <label for="score">Scor carte(ajuta la ordonare-scor mare first)</label>
+                                        <input type="text" class="form-control" name="score">
+                                    </div>
                                     <div class="col-md-12">
                                         <label for="length">Link imagine cover</label>
                                         <input type="text" class="form-control" name="img">
@@ -67,6 +71,7 @@
                                         <th>Id</th>
                                         <th>Titlu Carte</th>
                                         <th>Autor</th>
+                                        <th>Scor(ordine)</th>
                                         <th>Timp Citire</th>
                                         <th>Actiuni</th>
                                     </tr>
@@ -77,6 +82,7 @@
                                             <td>{{$u->id}}</td>
                                             <td>{{$u->title}}</td>
                                             <td>{{$u->author}}</td>
+                                            <td>{{$u->score}}</td>
                                             <td>{{$u->read_time}}</td>
                                             <td>
                                                 <a href="{{url('bookEdit') . "/" . $u->id}}" class="btn btn-primary btn-xs">Editare</a>
