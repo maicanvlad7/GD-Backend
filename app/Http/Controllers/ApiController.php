@@ -34,34 +34,79 @@ class ApiController extends Controller
 
 
         if(strtoupper($request->dc) == "GD50" || strtoupper($request->dc) == "GD20" || strtoupper($request->dc) == "UNI20") {
-            $checkout_session = \Stripe\Checkout\Session::create([
-                'line_items' => [[
-                    # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-                    'price' => $request->product_id,
-                    'quantity' => 1,
-                ]],
-                'mode' => 'subscription',
-                'discounts' => [[
-                    'coupon' => strtoupper($request->dc),
-                ]],
-                'tax_id_collection' => ['enabled' => true],
-                'locale' => 'ro',
-                'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
-                'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
-            ]);
+            if(isset($request->te) && $request->te == 1) {
+
+                $trial_end_date = Date('Y-m-d H:i:s', strtotime('+7 days'));
+                $trial_end = strtotime($trial_end_date);
+
+                $checkout_session = \Stripe\Checkout\Session::create([
+                    'line_items' => [[
+                        # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
+                        'price' => $request->product_id,
+                        'quantity' => 1,
+                    ]],
+                    'mode' => 'subscription',
+                    'subscription_data' => [
+                        "trial_period_days" => 7
+                    ],
+                    'discounts' => [[
+                        'coupon' => strtoupper($request->dc),
+                    ]],
+                    'tax_id_collection' => ['enabled' => true],
+                    'locale' => 'ro',
+                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
+                    'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
+                ]);
+            }else {
+                $checkout_session = \Stripe\Checkout\Session::create([
+                    'line_items' => [[
+                        # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
+                        'price' => $request->product_id,
+                        'quantity' => 1,
+                    ]],
+                    'mode' => 'subscription',
+                    'discounts' => [[
+                        'coupon' => strtoupper($request->dc),
+                    ]],
+                    'tax_id_collection' => ['enabled' => true],
+                    'locale' => 'ro',
+                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
+                    'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
+                ]);
+            }
+
         }else {
-            $checkout_session = \Stripe\Checkout\Session::create([
-                'line_items' => [[
-                    # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-                    'price' => $request->product_id,
-                    'quantity' => 1,
-                ]],
-                'mode' => 'subscription',
-                'tax_id_collection' => ['enabled' => true],
-                'locale' => 'ro',
-                'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
-                'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
-            ]);
+            if(isset($request->te) && $request->te == 1) {
+                $checkout_session = \Stripe\Checkout\Session::create([
+                    'line_items' => [[
+                        # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
+                        'price' => $request->product_id,
+                        'quantity' => 1,
+                    ]],
+                    'mode' => 'subscription',
+                    'subscription_data' => [
+                        "trial_period_days" => 7
+                    ],
+                    'tax_id_collection' => ['enabled' => true],
+                    'locale' => 'ro',
+                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
+                    'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
+                ]);
+            }else {
+                $checkout_session = \Stripe\Checkout\Session::create([
+                    'line_items' => [[
+                        # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
+                        'price' => $request->product_id,
+                        'quantity' => 1,
+                    ]],
+                    'mode' => 'subscription',
+                    'tax_id_collection' => ['enabled' => true],
+                    'locale' => 'ro',
+                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
+                    'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
+                ]);
+            }
+
         }
 
 
