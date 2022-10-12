@@ -88,6 +88,9 @@ Route::post('savePayoutEdit/{id}', [DashController::class, 'savePayoutEdit']);
 //CRONS
 Route::get('avfec', [DashController::class, 'addViewsToCourses']);
 
+//check for subscriber status on convertKit tag
+Route::get('cfssck', [DashController::class, 'checkForTagStatusCk']);
+
 
 
 

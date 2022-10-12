@@ -56,8 +56,7 @@ Route::post('gass', [StoryController::class, 'getAll']);
 //get success story by id
 Route::post('gssbi', [StoryController::class, 'getStoryById']);
 
-//check for subscriber status on convertKit tag
-Route::get('cfssck', [ApiController::class, 'checkForTagStatusCk']);
+
 
 
 
