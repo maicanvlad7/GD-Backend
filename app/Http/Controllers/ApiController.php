@@ -543,6 +543,8 @@ class ApiController extends Controller
 
     public function checkForTagStatusCk()
     {
+        set_time_limit(1200);
+
         $has_ab_tag_id = '3284089';
         $no_ab_tag_id  = '3284129';
 
