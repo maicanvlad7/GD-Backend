@@ -576,7 +576,8 @@ class DashController extends Controller
         $has_ab_tag_id = '3284089';
         $no_ab_tag_id  = '3284129';
 
-        $users = User::all();
+        $users = User::where('isHost', '0')->where('is_bot', '0')->get();
+
         dd($users);
 
         foreach($users as $u) {
