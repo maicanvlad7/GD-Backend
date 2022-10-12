@@ -549,6 +549,7 @@ class ApiController extends Controller
         $no_ab_tag_id  = '3284129';
 
         $users = User::all();
+        dd($users);
 
         foreach($users as $u) {
             //if user is not paying subscription add tag in CK
