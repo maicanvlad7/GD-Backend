@@ -551,8 +551,10 @@ class ApiController extends Controller
             'sub_1LpygaCLTsRzEEEV69qMVayq',
             []
         );
-
-        dd($data);
+        //daca este oricare din status de mai jos inseama ca ii scoate subscription si il punem = 0, level = 0 => user nu a platit abonamentul
+        //canceled
+        //unpaid
+        dd($data->status);
 
 //        $users = User::where('isHost', '0')->where('is_bot', '0')->where('subscription','!=','0');
     }
