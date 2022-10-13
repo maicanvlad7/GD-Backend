@@ -547,15 +547,21 @@ class ApiController extends Controller
             env('STRIPE_API_KEY')
         );
 
-        $data = $stripe->subscriptions->retrieve(
-            'sub_1LpygaCLTsRzEEEV69qMVayq',
-            []
-        );
-        //daca este oricare din status de mai jos inseama ca ii scoate subscription si il punem = 0, level = 0 => user nu a platit abonamentul
-        //canceled
-        //unpaid
-        dd($data->status);
+        $users = User::where('isHost', '0')->where('is_bot', '0')->where('subscription','!=','0')->get();
 
-//        $users = User::where('isHost', '0')->where('is_bot', '0')->where('subscription','!=','0');
+        foreach($users as $u) {
+            $data =  $data = $stripe->subscriptions->retrieve(
+                $u->subscription,
+                []
+            );
+
+            //daca este canceled sau neplatita facem update si la noi in DB
+            if($data->status == 'canceled' || $data->status == 'unpaid') {
+                $u->level = 0;
+                $u->subscription = 0;
+
+                $u->save();
+            }
+        }
     }
 }
