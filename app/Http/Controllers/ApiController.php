@@ -540,4 +540,20 @@ class ApiController extends Controller
             'message' => 'Te-ai abonat cu succes'
         ], 200);
     }
+
+    public function checkkAllUserSubs()
+    {
+        $stripe = new \Stripe\StripeClient(
+            env('STRIPE_API_KEY')
+        );
+
+        $data = $stripe->subscriptions->retrieve(
+            'sub_1LpygaCLTsRzEEEV69qMVayq',
+            []
+        );
+
+        dd($data);
+
+//        $users = User::where('isHost', '0')->where('is_bot', '0')->where('subscription','!=','0');
+    }
 }

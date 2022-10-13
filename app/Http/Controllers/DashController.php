@@ -571,14 +571,12 @@ class DashController extends Controller
 
     public function checkForTagStatusCk()
     {
-        set_time_limit(1200);
+        set_time_limit(0);
 
         $has_ab_tag_id = '3284089';
         $no_ab_tag_id  = '3284129';
 
         $users = User::select(['email','level'])->where('isHost', '0')->where('is_bot', '0')->get();
-
-        dd($users);
 
         foreach($users as $u) {
             //if user is not paying subscription add tag in CK
@@ -644,4 +642,6 @@ class DashController extends Controller
             }
         }
     }
+
+
 }

@@ -56,7 +56,7 @@ Route::post('gass', [StoryController::class, 'getAll']);
 //get success story by id
 Route::post('gssbi', [StoryController::class, 'getStoryById']);
 
-
+Route::get('caus', [ApiController::class,'checkkAllUserSubs']);
 
 
 
