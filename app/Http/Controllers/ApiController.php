@@ -550,18 +550,24 @@ class ApiController extends Controller
         $users = User::where('isHost', '0')->where('is_bot', '0')->where('subscription','!=','0')->get();
 
         foreach($users as $u) {
-            $data =  $data = $stripe->subscriptions->retrieve(
-                $u->subscription,
-                []
-            );
 
-            //daca este canceled sau neplatita facem update si la noi in DB
-            if($data->status == 'canceled' || $data->status == 'unpaid') {
-                $u->level = 0;
-                $u->subscription = 0;
+            try {
+                $data =  $data = $stripe->subscriptions->retrieve(
+                    $u->subscription,
+                    []
+                );
 
-                $u->save();
+                //daca este canceled sau neplatita facem update si la noi in DB
+                if($data->status == 'canceled' || $data->status == 'unpaid') {
+                    $u->level = 0;
+                    $u->subscription = 0;
+
+                    $u->save();
+                }
+            } catch(\Stripe\Exception\InvalidRequestException $e) {
+                error_log('Invalid sub from test mode used in live - bots');
             }
+
         }
     }
 }
