@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\HostController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PayoutController;
@@ -57,6 +58,8 @@ Route::post('gass', [StoryController::class, 'getAll']);
 Route::post('gssbi', [StoryController::class, 'getStoryById']);
 
 Route::get('caus', [ApiController::class,'checkkAllUserSubs']);
+
+Route::post('getLp', [LandingController::class, 'getBySlug']);
 
 
 

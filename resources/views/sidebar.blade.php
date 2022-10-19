@@ -73,6 +73,12 @@
                         <span>Payouts</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->is('landing*') ? 'active' : ''}}">
+                    <a href="{{url('landings')}}" class='sidebar-link'>
+                        <i class="bi bi-cart"></i>
+                        <span>Landing Pages</span>
+                    </a>
+                </li>
 
             </ul>
         </div>

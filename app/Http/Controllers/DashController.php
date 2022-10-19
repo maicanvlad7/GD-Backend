@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Course;
 use App\Models\Host;
+use App\Models\Landing;
 use App\Models\Lesson;
 use App\Models\News;
 use App\Models\Payout;
@@ -567,6 +568,35 @@ class DashController extends Controller
         if($payout->save()) {
             return redirect('/payouts')->with('message', 'Payout editat cu succes!');
         }
+    }
+
+    public function landings()
+    {
+        $courses = Course::select('id','name')->get();
+
+        $sql_land = "SELECT courses.id as course_id, courses.name as course_name, landings.* FROM landings INNER JOIN courses ON courses.id = landings.course_id";
+
+        $landings = DB::select($sql_land);
+
+        return view('landings', ["courses" => $courses, "landings" => $landings]);
+    }
+
+    public function addLanding(Request $request)
+    {
+        $landing = new Landing();
+
+        $looper = $request->all();
+
+        foreach($looper as $key=>$val) {
+            if($key != "_token") {
+                $landing->$key = $val;
+            }
+        }
+
+        if($landing->save()) {
+            return redirect()->back()->with('message', 'Ati adaugat cu succes ' . $landing->title);
+        }
+
     }
 
     public function checkForTagStatusCk()
