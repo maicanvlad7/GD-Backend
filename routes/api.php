@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClogController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\HostController;
@@ -60,6 +61,10 @@ Route::post('gssbi', [StoryController::class, 'getStoryById']);
 Route::get('caus', [ApiController::class,'checkkAllUserSubs']);
 
 Route::post('getLp', [LandingController::class, 'getBySlug']);
+
+Route::post('lll', [ClogController::class, 'store']);
+
+
 
 
 
