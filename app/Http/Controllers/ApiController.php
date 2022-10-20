@@ -348,8 +348,6 @@ class ApiController extends Controller
             'active'    => 1,
         ]);
 
-        var_dump($user);
-
         $new_time = date("Y-m-d H:i:s", strtotime('+5 hours'));
 
        if(!$active) {
