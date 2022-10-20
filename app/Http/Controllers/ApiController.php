@@ -299,7 +299,7 @@ class ApiController extends Controller
     public function register(Request $request)
     {
         //Validate data
-        $data = $request->only('name', 'email', 'password', 'refCode');
+        $data = $request->only('name', 'email', 'password', 'refCode', 'phone');
         $validator = Validator::make($data, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
@@ -343,6 +343,7 @@ class ApiController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'phone' => $request->phone,
             'referred_by' => intval($refBy),
             'active'    => 1,
         ]);
