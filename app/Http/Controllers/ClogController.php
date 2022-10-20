@@ -39,7 +39,7 @@ class ClogController extends Controller
 
         $clog->current     = $request->current;
         $clog->button_name = $request->button_name;
-        $clog->user_id     = $request->user_id;
+        $clog->user_id     = empty($request->user_id) ?? null ;
 
         $clog->save();
     }
