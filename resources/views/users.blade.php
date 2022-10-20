@@ -29,6 +29,7 @@
                                     <tr>
                                         <th>Nume</th>
                                         <th>Email</th>
+                                        <th>Telefon</th>
                                         <th>SubID</th>
                                         <th>CustomerID</th>
                                         <th>Abonament</th>
@@ -40,6 +41,7 @@
                                         <tr>
                                             <td>{{$u->name}}</td>
                                             <td>{{$u->email}}</td>
+                                            <td>{{$u->phone}}</td>
                                             <td>{{$u->subscription}}</td>
                                             <td>{{$u->stripe_id}}</td>
                                             <td>
@@ -84,7 +86,9 @@
     <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');
-        let dataTable = new simpleDatatables.DataTable(table1);
+        let dataTable = new simpleDatatables.DataTable(table1, {
+            order: [[0, 'desc']]
+        });
     </script>
 
 @endsection
