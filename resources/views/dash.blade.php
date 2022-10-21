@@ -91,55 +91,6 @@
                         </div>
                     </div>
                 </section>
-                <div class="row">
-                    <div class="col-12 col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Focus List</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-lg">
-                                        <thead>
-                                        <tr>
-                                            <th>Nume</th>
-                                            <th>Descriere</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="col-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="avatar avatar-md">
-                                                        <img src="{{asset('images/faces/5.jpg')}}">
-                                                    </div>
-                                                    <p class="font-bold ms-3 mb-0">Resurse Cursuri</p>
-                                                </div>
-                                            </td>
-                                            <td class="col-auto">
-                                                <p class=" mb-0">Upload in bunny cdn si linkuire cu cursul de care tine fiecare resursa + verificare</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="avatar avatar-md">
-                                                        <img src="{{asset('images/faces/5.jpg')}}">
-                                                    </div>
-                                                    <p class="font-bold ms-3 mb-0">Subitlu Cursuri</p>
-                                                </div>
-                                            </td>
-                                            <td class="col-auto">
-                                                <p class=" mb-0">Din pagina de cursuri se vor adauga subtitlurile pentru fiecare curs cu verificare daca apar ok si in site pe live</p>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="row">
                     <div class="col-12 col-md-12">
