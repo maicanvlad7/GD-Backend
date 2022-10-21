@@ -33,12 +33,27 @@ class DashController extends Controller
             }
         }
 
+        $sql = "select count(id) as hits, button_name from clogs group by button_name";
+        $clicks = DB::select($sql);
+
+        $hits    = array();
+        $labels  = array();
+
+        if(!empty($clicks)) {
+            foreach($clicks as $c) {
+                array_push($hits, intval($c->hits));
+                array_push($labels, $c->button_name);
+            }
+        }
+
         $data = new \stdClass();
 
         $data->users   = count($users);
         $data->subbed  = $subbed;
         $data->courses = $courses;
         $data->books   = $books;
+        $data->hits    = json_encode($hits);
+        $data->labels  = json_encode($labels);
 
         return view('dash', ["data" => $data]);
     }
