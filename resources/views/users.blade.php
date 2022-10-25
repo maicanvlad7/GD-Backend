@@ -162,7 +162,7 @@
 
         const nameContainer = document.getElementById('userCallContainer');
         const addCallAction = document.getElementById('addCallToDb');
-        const finalUrl = 'http://127.0.0.1:8000/muac/';
+        const finalUrl = 'https://app.gandestediferit.ro/muac/';
         const form     = document.getElementById('callAdderForm');
 
         let userName = '';
