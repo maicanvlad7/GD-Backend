@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Calls;
 use App\Models\Course;
 use App\Models\Host;
 use App\Models\Landing;
@@ -196,9 +197,22 @@ class DashController extends Controller
             return Redirect::to('/login');
         }
 
-        $users = User::all();
+        $sql = "SELECT calls.called, users.* FROM users LEFT JOIN calls ON users.id = calls.user_id";
+        $users = DB::select($sql);
 
         return view('users', ["data" => $users]);
+    }
+
+    public function showAllUserCalled()
+    {
+        if( !Session::exists('logged_in') ) {
+            return Redirect::to('/login');
+        }
+
+        $sql = "SELECT calls.*, users.phone, users.name, users.email FROM calls INNER JOIN users ON users.id = calls.user_id";
+        $calls = DB::select($sql);
+
+        return view('calls', ["data" => $calls]);
     }
 
 
@@ -231,6 +245,24 @@ class DashController extends Controller
             return redirect()->back()->with('message', 'Ati editat cu succes userul ' . $user->name);
         }
 
+    }
+
+    public function addCallToUser(Request $request, $id)
+    {
+
+        $call = Calls::updateOrCreate(
+            ['user_id' => $id],
+            [
+                'called' => 1,
+                'status' => $request->status,
+                'notes' => $request->notes,
+                'called_by'=> $request->called_by
+            ]
+        );
+
+        if($call) {
+            return redirect()->back()->with('message', 'Apelul a fost adaugat cu succes!');
+        }
     }
 
 //    COURSE

@@ -14,7 +14,7 @@
             </header>
 
             <div class="page-heading">
-                <h3>Utilizatori GD</h3>
+                <h3>Lista Apeluri Sales GD</h3>
             </div>
             <div class="page-content">
                 <div class="row">
@@ -27,49 +27,27 @@
                                 <table class="table table-striped" id="table1">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Id Utilizator</th>
                                         <th>Nume</th>
-                                        <th>Email</th>
                                         <th>Telefon</th>
-                                        <th>SubID</th>
-                                        <th>CustomerID</th>
-                                        <th>Abonament</th>
-                                        <th>Actiuni</th>
+                                        <th>Sunat De</th>
+                                        <th>Status</th>
+                                        <th>Notite</th>
+                                        <th>Data Apel</th>
+                                        <th>Data Update</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($data as $u)
                                         <tr>
-                                            <td>{{$u->id}}</td>
+                                            <td>{{$u->user_id}}</td>
                                             <td>{{$u->name}}</td>
-                                            <td>{{$u->email}}</td>
                                             <td>{{$u->phone}}</td>
-                                            <td>{{$u->subscription}}</td>
-                                            <td>{{$u->stripe_id}}</td>
-                                            <td>
-                                                @if($u->called)
-                                                    <span class="badge bg-success">Sunat</span>
-                                                    @else
-                                                    <span class="badge bg-warning">Nesunat</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($u->level == '1')
-                                                    basic
-                                                @elseif($u->level == '2')
-                                                    pro
-                                                @elseif($u->level == '3')
-                                                    full
-                                                @else
-                                                    -
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-primary btn-xs" href="{{url('/user/') . "/" . $u->id}}">Edit</a>
-                                                <button type="button" class="btn btn-outline-primary block callAdder" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" onclick="test(this)" data-userId="{{$u->id}}" data-userName="{{$u->name}}">
-                                                    Mark Called
-                                                </button>
-                                            </td>
+                                            <td>{{$u->called_by}}</td>
+                                            <td>{{$u->status}}</td>
+                                            <td>{{$u->notes}}</td>
+                                            <td>{{$u->created_at}}</td>
+                                            <td>{{$u->updated_at}}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

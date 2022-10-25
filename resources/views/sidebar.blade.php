@@ -79,6 +79,12 @@
                         <span>Landing Pages</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->is('call*') ? 'active' : ''}}">
+                    <a href="{{url('calls')}}" class='sidebar-link'>
+                        <i class="bi bi-phone"></i>
+                        <span>Lista Apeluri</span>
+                    </a>
+                </li>
 
             </ul>
         </div>

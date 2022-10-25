@@ -32,6 +32,9 @@ Route::get('users', [DashController::class, 'showAllUsers']);
 Route::get('user/{id}', [DashController::class, 'showUser']);
 Route::post('user/{id}', [DashController::class, 'saveUser']);
 
+Route::post('muac/{id}', [DashController::class, 'addCallToUser']);
+Route::get('calls', [DashController::class, 'showAllUserCalled']);
+
 //TEACHERS
 Route::get('teachers', [DashController::class, 'showAllTeachers']);
 Route::get('teacher/{id}', [DashController::class, 'showTeacher']);
