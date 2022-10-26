@@ -112,6 +112,7 @@
                                     <label for="status">Status</label>
                                     <select name="status" id="status" class="form-control">
                                         <option value="Revenim pe email cu 7 zile">Revenim pe email cu 7 zile</option>
+                                        <option value="Nu a raspuns">Nu a raspuns</option>
                                         <option value="Revenim pe email cu ab normal">Revenim pe email cu ab normal</option>
                                         <option value="Nu este interesat">Nu este interesat</option>
                                         <option value="Nu are bani, revenim">Nu are bani, revenim</option>
