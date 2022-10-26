@@ -29,6 +29,7 @@
                                     <tr>
                                         <th>Id Utilizator</th>
                                         <th>Nume</th>
+                                        <th>Email</th>
                                         <th>Telefon</th>
                                         <th>Sunat De</th>
                                         <th>Status</th>
@@ -42,6 +43,7 @@
                                         <tr>
                                             <td>{{$u->user_id}}</td>
                                             <td>{{$u->name}}</td>
+                                            <td>{{$u->email}}</td>
                                             <td>{{$u->phone}}</td>
                                             <td>{{$u->called_by}}</td>
                                             <td>{{$u->status}}</td>
@@ -87,8 +89,9 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select name="status" id="status" class="form-control">
-                                        <option value="Revenim pe email cu 7 zile">Revenim pe email cu 7 zile</option>
                                         <option value="Revenim pe email cu ab normal">Revenim pe email cu ab normal</option>
+                                        <option value="Nu a raspuns">Nu a raspuns</option>
+                                        <option value="Revenim pe email cu 7 zile">Revenim pe email cu 7 zile</option>
                                         <option value="Nu este interesat">Nu este interesat</option>
                                         <option value="Nu are bani, revenim">Nu are bani, revenim</option>
                                     </select>
