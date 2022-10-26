@@ -28,6 +28,7 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Data Creare</th>
                                         <th>Nume</th>
                                         <th>Email</th>
                                         <th>Telefon</th>
@@ -41,6 +42,7 @@
                                     @foreach($data as $u)
                                         <tr>
                                             <td>{{$u->id}}</td>
+                                            <td>{{$u->created_at}}</td>
                                             <td>{{$u->name}}</td>
                                             <td>{{$u->email}}</td>
                                             <td>{{$u->phone}}</td>

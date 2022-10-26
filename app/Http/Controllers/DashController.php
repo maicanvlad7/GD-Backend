@@ -209,7 +209,7 @@ class DashController extends Controller
             return Redirect::to('/login');
         }
 
-        $sql = "SELECT calls.*, users.phone, users.name, users.email FROM calls INNER JOIN users ON users.id = calls.user_id";
+        $sql = "SELECT calls.*, users.phone, users.name, users.email, users.created_at as data_creare FROM calls INNER JOIN users ON users.id = calls.user_id";
         $calls = DB::select($sql);
 
         return view('calls', ["data" => $calls]);
