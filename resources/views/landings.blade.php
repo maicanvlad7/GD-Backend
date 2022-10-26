@@ -86,6 +86,7 @@
                                             <td>{{$u->slug}}</td>
                                             <td>
                                                 <a href="{{url('editLanding') . "/" . $u->id}}" class="btn btn-info btn-xs">Edit</a>
+                                                <a href="{{url('deleteLanding') . "/" . $u->id}}" class="btn btn-outline-danger btn-xs">Sterge</a>
                                             </td>
                                         </tr>
                                     @endforeach

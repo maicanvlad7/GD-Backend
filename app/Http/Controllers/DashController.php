@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class DashController extends Controller
 {
@@ -642,6 +643,41 @@ class DashController extends Controller
 
         if($landing->save()) {
             return redirect()->back()->with('message', 'Ati adaugat cu succes ' . $landing->title);
+        }
+
+    }
+
+    public function deleteLanding(Request $request, $id)
+    {
+        $landing = Landing::find($id);
+
+        if($landing->delete()) {
+            return redirect()->back()->with('message', 'Ati sters cu succes ' . $landing->title);
+        }
+    }
+
+    public function editLanding($id)
+    {
+        $landing = Landing::find($id);
+
+
+        return view('edit_landing', ["landing" => $landing]);
+    }
+
+    public function saveLandingEdit (Request $request)
+    {
+
+        $landing = Landing::find($request->id);
+
+        foreach($request->all()  as $key => $r) {
+
+            if(!in_array($key, ['id', '_token'])) {
+                $landing->$key = $r;
+            }
+        }
+
+        if($landing->save()) {
+            return redirect()->back()->with('message', 'Ati editat cu succes landing-ul ' . $landing->title);
         }
 
     }

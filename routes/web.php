@@ -88,9 +88,12 @@ Route::post('addPayout', [DashController::class, 'addPayout']);
 Route::get('editPayout/{id}', [DashController::class, 'editPayout']);
 Route::post('savePayoutEdit/{id}', [DashController::class, 'savePayoutEdit']);
 
-//PAYOUTS
+//LANDINGS
 Route::get('landings', [DashController::class, 'landings']);
 Route::post('addLanding', [DashController::class, 'addLanding']);
+Route::get('deleteLanding/{id}', [DashController::class, 'deleteLanding']);
+Route::get('editLanding/{id}', [DashController::class, 'editLanding']);
+Route::post('saveLandingEdit', [DashController::class, 'saveLandingEdit']);
 
 //CRONS
 Route::get('avfec', [DashController::class, 'addViewsToCourses']);
