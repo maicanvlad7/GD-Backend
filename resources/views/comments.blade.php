@@ -35,6 +35,14 @@
                                         <label for="length">Email</label>
                                         <input type="text" class="form-control" name="email">
                                     </div>
+                                    <div class="col-md-6 mt-2">
+                                        <label for="level">Abonament</label>
+                                        <select name="level" class="form-control">
+                                            <option value="1">Basic</option>
+                                            <option value="2">PRO</option>
+                                            <option value="3">Premium</option>
+                                        </select>
+                                    </div>
                                     <div class="col-md-12 mt-2">
                                         <button class="btn btn-success btn-xs" value="submit">Adauga Utilizator Fake</button>
                                     </div>

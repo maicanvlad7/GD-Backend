@@ -105,7 +105,7 @@ class DashController extends Controller
         $user->referred_by = 0;
         $user->is_bot = 1;
         $user->active = 1;
-        $user->level  = random_int(1,3);
+        $user->level  = $request->level;
 
         if($user->save()) {
             return redirect()->back()->with('message', 'Ati adaugat cu succes userul ' . $user->name);
