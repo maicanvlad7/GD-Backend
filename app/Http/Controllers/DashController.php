@@ -10,6 +10,7 @@ use App\Models\Landing;
 use App\Models\Lesson;
 use App\Models\News;
 use App\Models\Payout;
+use App\Models\Question;
 use App\Models\Resource;
 use App\Models\Review;
 use App\Models\Story;
@@ -551,6 +552,7 @@ class DashController extends Controller
 
         $news->image = $request->image;
         $news->link = $request->link;
+        $news->score = $request->score;
 
         if($news->save()) {
             return redirect()->back()->with("message", "NEWS adaugate cu succes.");
@@ -563,6 +565,71 @@ class DashController extends Controller
 
         if($news->delete()) {
             return redirect()->back()->with('message', 'Ati sters NEWS cu succes!');
+        }
+    }
+
+    public function editNews($id)
+    {
+        $news = News::find($id);
+
+        return view('edit_news', ["data" => $news]);
+    }
+
+    public function saveNewsEdit(Request $request)
+    {
+        $news = News::find($request->id);
+
+        foreach($request->all() as $key => $r) {
+            if(!in_array($key, ['id', '_token'])) {
+                $news->$key = $r;
+            }
+        }
+
+        if($news->save()) {
+            return redirect()->back()->with('message', 'Ati editat NEWS cu succes!');
+        }
+
+    }
+
+    public function questions()
+    {
+        $sql = "SELECT courses.name as cname, users.name, questions.* FROM questions 
+                INNER JOIN users on questions.user_id = users.id
+                INNER JOIN courses on questions.course_id = courses.id";
+
+        $questions = DB::select($sql);
+
+        $users = User::select(['id','email','name'])->where('is_bot', 1)->where('level', '>=' ,'2')->get();
+        $courses = Course::select(['id','name'])->get();
+
+        return view('questions', [
+            "data" => $questions,
+            "users" => $users,
+            "courses" => $courses
+        ]);
+    }
+
+    public function addQuestion(Request $request)
+    {
+        $question = new Question();
+
+        foreach($request->all() as $key => $q) {
+            if($key !== '_token') {
+                $question->$key = $q;
+            }
+        }
+
+        if($question->save()) {
+            return redirect()->back()->with('message', 'Ati editat intrebarea cu succes!');
+        }
+    }
+
+    public function deleteQuestion($id)
+    {
+        $question = Question::find($id);
+
+        if($question->delete()) {
+            return redirect()->back()->with('message', 'Ati sters intrebarea cu succes!');
         }
     }
 

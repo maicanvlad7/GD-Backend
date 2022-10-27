@@ -14,29 +14,37 @@
             </header>
 
             <div class="page-heading">
-                <h3>News Banners Gandeste Diferit</h3>
+                <h3>Inrebari Cursuri GD</h3>
             </div>
             <div class="page-content">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <form action="{{url('addNews')}}" method="post">
+                            <form action="{{url('addQuestion')}}" method="post">
                                 @csrf
                                 <div class="row p-4">
-                                    <div class="col-md-6 ">
-                                        <label for="name">Imagine Cover (Bunny)</label>
-                                        <input type="text" class="form-control" name="image" required>
+                                    <div class="col-md-6">
+                                        <label for="user_id">Utilizator</label>
+                                        <select name="user_id" class="form-control">
+                                            @foreach($users as $u)
+                                                <option value="{{$u->id}}">{{$u->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="length">Link (se va completa doar daca imaginea duce undeva - actiune)</label>
-                                        <input type="text" class="form-control" name="link">
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-                                        <label for="score">Scor (ordonare)</label>
-                                        <input type="text" class="form-control" name="score">
+                                        <label for="course_id">Curs</label>
+                                        <select name="course_id" class="form-control">
+                                            @foreach($courses as $c)
+                                                <option value="{{$c->id}}">{{$c->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-md-12 mt-2">
-                                        <button class="btn btn-success btn-xs" value="submit">Adauga News</button>
+                                        <label for="content">Intrebare</label>
+                                        <textarea name="content" class="form-control"></textarea>
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <button class="btn btn-success btn-xs" value="submit">Adauga Intrebare</button>
                                     </div>
                                 </div>
                             </form>
@@ -57,9 +65,9 @@
                                     <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Imagine</th>
-                                        <th>Link</th>
-                                        <th>Scor</th>
+                                        <th>Curs</th>
+                                        <th>Utilizator</th>
+                                        <th>Intrebare</th>
                                         <th>Actiuni</th>
                                     </tr>
                                     </thead>
@@ -67,12 +75,11 @@
                                     @foreach($data as $u)
                                         <tr>
                                             <td>{{$u->id}}</td>
-                                            <td>{{$u->image}}</td>
-                                            <td>{{$u->link}}</td>
-                                            <td>{{$u->score}}</td>
+                                            <td>{{$u->name}}</td>
+                                            <td>{{$u->cname}}</td>
+                                            <td>{{$u->content}}</td>
                                             <td>
-                                                <a href="{{url('editNews') . "/" . $u->id}}" class="btn btn-info btn-xs">Editare</a>
-                                                <a href="{{url('deleteNews') . "/" . $u->id}}" class="btn btn-outline-danger btn-xs">Sterge</a>
+                                                <a href="{{url('deleteQuestion') . "/" . $u->id}}" class="btn btn-outline-danger btn-xs">Sterge</a>
                                             </td>
                                         </tr>
                                     @endforeach

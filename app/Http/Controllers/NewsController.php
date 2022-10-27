@@ -85,7 +85,7 @@ class NewsController extends Controller
 
     public function getAll()
     {
-        $news = News::all();
+        $news = News::orderBy('score', 'DESC')->get();
 
         return response()->json([
             "success" => true,

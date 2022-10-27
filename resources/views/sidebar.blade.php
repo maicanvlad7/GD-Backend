@@ -79,6 +79,12 @@
                         <span>Landing Pages</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->is('question*') ? 'active' : ''}}">
+                    <a href="{{url('questions')}}" class='sidebar-link'>
+                        <i class="bi bi-question-circle"></i>
+                        <span>Intrebari Cursuri</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ request()->is('call*') ? 'active' : ''}}">
                     <a href="{{url('calls')}}" class='sidebar-link'>
                         <i class="bi bi-phone"></i>

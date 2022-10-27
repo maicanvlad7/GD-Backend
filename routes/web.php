@@ -81,6 +81,8 @@ Route::get('deleteBook/{id}', [DashController::class, 'deleteBook']);
 Route::get('news', [DashController::class, 'news']);
 Route::post('addNews', [DashController::class, 'addNews']);
 Route::get('deleteNews/{id}', [DashController::class, 'deleteNews']);
+Route::get('editNews/{id}', [DashController::class, 'editNews']);
+Route::post('saveNewsEdit', [DashController::class, 'saveNewsEdit']);
 
 //PAYOUTS
 Route::get('payouts', [DashController::class, 'payouts']);
@@ -94,6 +96,12 @@ Route::post('addLanding', [DashController::class, 'addLanding']);
 Route::get('deleteLanding/{id}', [DashController::class, 'deleteLanding']);
 Route::get('editLanding/{id}', [DashController::class, 'editLanding']);
 Route::post('saveLandingEdit', [DashController::class, 'saveLandingEdit']);
+
+//QUESTIONs
+Route::get('questions', [DashController::class, 'questions']);
+Route::post('addQuestion', [DashController::class, 'addQuestion']);
+Route::get('deleteQuestion/{id}', [DashController::class, 'deleteQuestion']);
+
 
 //CRONS
 Route::get('avfec', [DashController::class, 'addViewsToCourses']);
