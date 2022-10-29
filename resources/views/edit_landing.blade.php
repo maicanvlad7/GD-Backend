@@ -44,13 +44,17 @@
                                 <label for="slug">Slug</label>
                                 <input type="text" id="slug" class="form-control" name="slug" placeholder="Customer ID" value="{{$landing['slug']}}">
                             </div>
+                            <div class="form-group mt-1">
+                                <label for="is_trial">Arata 7 Zile (1 = DA, 0 = NU)</label>
+                                <input type="number" id="is_trial" class="form-control" name="is_trial" placeholder="Customer ID" value="{{$landing['is_trial']}}">
+                            </div>
                             <button class="btn btn-primary btn-xs mt-2">Salvează</button>
                         </form>
                     </div>
                 </div>
             </div>
 
-{{--
+
 
             <footer>
                 <div class="footer clearfix mb-0 text-muted">

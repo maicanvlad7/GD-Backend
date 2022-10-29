@@ -47,6 +47,10 @@
                                         <label for="slug">Slug</label>
                                         <input type="text" name="slug" class="form-control" placeholder="acesta-este-un-slug-fara-diacritice-si-spatii">
                                     </div>
+                                    <div class="col-md-8">
+                                        <label for="is_trial">Arata 7 Zile (1=DA, 0=NU)</label>
+                                        <input type="number" name="is_trial" class="form-control">
+                                    </div>
                                     <div class="col-md-12 mt-2">
                                         <button class="btn btn-success btn-xs" value="submit">Adauga Landing Page</button>
                                     </div>
@@ -73,6 +77,7 @@
                                         <th>Curs</th>
                                         <th>VSL Id Vimeo</th>
                                         <th>Slug</th>
+                                        <th>7 Days</th>
                                         <th>Actiuni</th>
                                     </tr>
                                     </thead>
@@ -84,6 +89,7 @@
                                             <td>{{$u->course_name}}</td>
                                             <td>{{$u->vsl_id}}</td>
                                             <td>{{$u->slug}}</td>
+                                            <td>{{$u->is_trial}}</td>
                                             <td>
                                                 <a href="{{url('editLanding') . "/" . $u->id}}" class="btn btn-info btn-xs">Edit</a>
                                                 <a href="{{url('deleteLanding') . "/" . $u->id}}" class="btn btn-outline-danger btn-xs">Sterge</a>
