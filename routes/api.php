@@ -64,6 +64,8 @@ Route::post('getLp', [LandingController::class, 'getBySlug']);
 
 Route::post('lll', [ClogController::class, 'store']);
 
+Route::post('spsu', [ApiController::class, 'stripeWebhookUpdateCall']);
+
 
 
 
