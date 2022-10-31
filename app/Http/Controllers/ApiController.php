@@ -610,7 +610,7 @@ class ApiController extends Controller
             case 'customer.subscription.deleted':
                 $subscription = $event->data->object;
 
-                $user = User::where('subscription',$subscription->subscription)->first();
+                $user = User::where('subscription',$subscription->id)->first();
 
                 $user->level = 0;
                 $user->subscription = 0;
