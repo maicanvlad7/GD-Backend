@@ -280,6 +280,13 @@ class CourseController extends Controller
 
     }
 
+    public function getFreeCourses()
+    {
+        $courses = Course::where('free', '1')->with(['host','category'])->get();
+
+        dd($courses);
+    }
+
 
 
 
