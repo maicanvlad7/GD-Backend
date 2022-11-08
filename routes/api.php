@@ -112,6 +112,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('ghrd', [HostController::class, 'getRefByHost']);
 
     Route::post('gfac', [CourseController::class, 'getFreeCourses']);
+    Route::post('gfcvd', [CourseController::class, 'getFreeData']);
 
     Route::post('cpbugd', [ApiController::class, 'changePassByUser']);
 

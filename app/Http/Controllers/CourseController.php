@@ -291,6 +291,24 @@ class CourseController extends Controller
         ], 200);
     }
 
+    public function getFreeData(Request $request)
+    {
+        if(!isset($request->course_id)) {
+            return response()->json([
+                "success" => false,
+                "message" => "Provide course id",
+            ], 500);
+        }
+
+        $course = Course::where('id', $request->course_id)->with(['category','host','lessons'])->first();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Got free course data",
+            "course" => $course
+        ], 200);
+    }
+
 
 
 
