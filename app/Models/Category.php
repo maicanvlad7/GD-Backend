@@ -13,4 +13,8 @@ class Category extends Model
 
     use HasFactory;
 
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
 }
