@@ -282,13 +282,13 @@ class CourseController extends Controller
 
     public function getFreeCourses()
     {
-        $courses = Course::where('free', '1')->with(['category'])->get();
+        $courses = Course::where('free', '1')->with('category')->get();
 
-        foreach($courses as $c) {
-            $courses->host = Host::where('id', $c->host)->first();
-        }
-
-        dd($courses);
+        return response()->json([
+            "success" => true,
+            "message" => "Got user progress",
+            "data" => $courses
+        ], 200);
     }
 
 
