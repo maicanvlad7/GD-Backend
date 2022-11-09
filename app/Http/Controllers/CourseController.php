@@ -284,11 +284,15 @@ class CourseController extends Controller
     public function getFreeCourses()
     {
         $courses = Course::where('free', '1')->with(['category','host'])->get();
+        $webinars = Free::where('type','webinar')->get();
+        $interviews = Free::where('type','interviu')->get();
 
         return response()->json([
             "success" => true,
             "message" => "Got user progress",
-            "courses" => $courses
+            "courses" => $courses,
+            "webinars" => $webinars,
+            "interviews" => $interviews
         ], 200);
     }
 
@@ -302,15 +306,12 @@ class CourseController extends Controller
         }
 
         $course = Course::where('id', $request->course_id)->with(['category','host','lessons'])->first();
-        $webinars = Free::where('type','webinar')->get();
-        $interviews = Free::where('type','interviu')->get();
+
 
         return response()->json([
             "success" => true,
             "message" => "Got free course data",
             "course" => $course,
-            "webinars" => $webinars,
-            "interviews" => $interviews
         ], 200);
     }
 
