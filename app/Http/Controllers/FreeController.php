@@ -82,4 +82,15 @@ class FreeController extends Controller
     {
         //
     }
+
+    public function getFreeData(Request $request)
+    {
+        $free = Free::find($request->free_id);
+
+        return response()->json([
+            "success" => true,
+            "message" => "Got free promo content",
+            "free"    => $free,
+        ], 200);
+    }
 }

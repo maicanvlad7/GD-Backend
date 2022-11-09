@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClogController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\FreeController;
 use App\Http\Controllers\HostController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\NewsController;
@@ -113,6 +114,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     Route::post('gfac', [CourseController::class, 'getFreeCourses']);
     Route::post('gfcvd', [CourseController::class, 'getFreeData']);
+    Route::post('gfpc', [FreeController::class, 'getFreeData']);
 
     Route::post('cpbugd', [ApiController::class, 'changePassByUser']);
 
