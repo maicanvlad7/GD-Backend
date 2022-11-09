@@ -19,8 +19,9 @@ class CreateFreesTable extends Migration
             $table->string('vimeo_id');
             $table->string('title');
             $table->string('subtitle')->nullable();
-            $table->string('guest');
+            $table->string('guest')->nullable();
             $table->string('description');
+            $table->string('type')->default('interviu');
             $table->timestamps();
         });
     }

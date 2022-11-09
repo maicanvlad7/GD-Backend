@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Free;
 use App\Models\Lesson;
 use App\Models\Review;
 use http\Env\Response;
@@ -301,11 +302,15 @@ class CourseController extends Controller
         }
 
         $course = Course::where('id', $request->course_id)->with(['category','host','lessons'])->first();
+        $webinars = Free::where('type','webinar')->get();
+        $interviews = Free::where('type','interviu')->get();
 
         return response()->json([
             "success" => true,
             "message" => "Got free course data",
-            "course" => $course
+            "course" => $course,
+            "webinars" => $webinars,
+            "interviews" => $interviews
         ], 200);
     }
 

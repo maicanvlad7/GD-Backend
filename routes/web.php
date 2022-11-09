@@ -97,9 +97,18 @@ Route::get('deleteLanding/{id}', [DashController::class, 'deleteLanding']);
 Route::get('editLanding/{id}', [DashController::class, 'editLanding']);
 Route::post('saveLandingEdit', [DashController::class, 'saveLandingEdit']);
 
-//QUESTIONs
+//QUESTIONS
 Route::get('questions', [DashController::class, 'questions']);
 Route::post('addQuestion', [DashController::class, 'addQuestion']);
+Route::get('deleteQuestion/{id}', [DashController::class, 'deleteQuestion']);
+
+//FREES
+//QUESTIONs
+Route::get('frees', [DashController::class, 'frees']);
+Route::post('addFreeCourse', [DashController::class, 'addFreeCourse']);
+Route::post('addFreeResource', [DashController::class, 'addFreeResource']);
+Route::get('deleteFree/{id}', [DashController::class, 'deleteFree']);
+Route::get('deleteFreeCourse/{id}', [DashController::class, 'deleteFreeCourse']);
 Route::get('deleteQuestion/{id}', [DashController::class, 'deleteQuestion']);
 
 

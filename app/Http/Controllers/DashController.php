@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Calls;
 use App\Models\Course;
+use App\Models\Free;
 use App\Models\Host;
 use App\Models\Landing;
 use App\Models\Lesson;
@@ -590,6 +591,71 @@ class DashController extends Controller
         }
 
     }
+
+    public function frees()
+    {
+        //select free courses
+        $courses = Course::select('name','id')->where('free', '1')->get();
+        $all_courses = Course::select('name','id')->where('free','0')->get();
+
+        $frees = Free::all();
+
+        return view('frees', [
+            "courses" => $courses,
+            "frees" => $frees,
+            "all_courses" => $all_courses,
+        ]);
+    }
+
+    public function addFreeCourse(Request $request)
+    {
+        $course = Course::find($request->course_id);
+
+        $course->free = 1;
+
+        $course->save();
+
+        return redirect()->back()->with('message', 'Curs marcat ca gratuit');
+    }
+
+    public function addFreeResource(Request $request)
+    {
+        $free = new Free();
+
+        foreach($request->all() as $key=>$val) {
+            if($key != '_token') {
+                $free->$key = $val;
+            }
+        }
+
+        if($free->save()) {
+            return redirect()->back()->with('message', 'Ai adaugat continut gratuit cu succes!');
+        }
+    }
+
+    public function deleteFree($id)
+    {
+        $free = Free::find($id);
+
+        if($free->delete()) {
+            return redirect()->back()->with('message', 'Resursa gratuita stearsa');
+        }
+    }
+
+
+    public function deleteFreeCourse($id)
+    {
+        $course = Course::find($id);
+
+        $course->free = 0;
+
+        $course->save();
+
+        return redirect()->back()->with('message', 'Curs sters din lista de gratuite');
+    }
+
+
+
 
     public function questions()
     {

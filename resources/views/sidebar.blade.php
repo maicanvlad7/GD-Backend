@@ -91,6 +91,12 @@
                         <span>Lista Apeluri</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->is('free*') ? 'active' : ''}}">
+                    <a href="{{url('frees')}}" class='sidebar-link'>
+                        <i class="bi bi-percent"></i>
+                        <span>Continut Gratuit</span>
+                    </a>
+                </li>
 
             </ul>
         </div>
