@@ -14,6 +14,7 @@ use App\Models\Payout;
 use App\Models\Question;
 use App\Models\Resource;
 use App\Models\Review;
+use App\Models\Social;
 use App\Models\Story;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -655,7 +656,38 @@ class DashController extends Controller
     }
 
 
+//SOCIALS
+    public function socials()
+    {
+        $socials = Social::with('host')->get();
+        $hosts   = Host::select('id','name')->get();
 
+        return view('socials', [
+            "socials" => $socials,
+            "hosts"   => $hosts,
+        ]);
+
+    }
+
+    public function addSocial(Request $request)
+    {
+        $social = Social::updateOrCreate([
+            "host_id" => $request->host_id,
+        ],[
+            "instagram" => $request->instagram,
+            "facebook"  => $request->facebook,
+            "website"  => $request->website,
+            "telegram" => $request->telegram,
+            "linkedin" => $request->linkedin
+        ]);
+
+        if($social) {
+            return redirect()->back()->with('message','Socials adaugate cu succes!');
+        }
+
+
+    }
+//END SOCIALS
 
     public function questions()
     {

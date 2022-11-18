@@ -111,6 +111,10 @@ Route::get('deleteFree/{id}', [DashController::class, 'deleteFree']);
 Route::get('deleteFreeCourse/{id}', [DashController::class, 'deleteFreeCourse']);
 Route::get('deleteQuestion/{id}', [DashController::class, 'deleteQuestion']);
 
+//SOCIALS
+Route::get('socials', [DashController::class, 'socials']);
+Route::post('addSocial', [DashController::class, 'addSocial']);
+
 
 //CRONS
 Route::get('avfec', [DashController::class, 'addViewsToCourses']);

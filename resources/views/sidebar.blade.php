@@ -97,6 +97,12 @@
                         <span>Continut Gratuit</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->is('social*') ? 'active' : ''}}">
+                    <a href="{{url('socials')}}" class='sidebar-link'>
+                        <i class="bi bi-link"></i>
+                        <span>Teacher Links</span>
+                    </a>
+                </li>
 
             </ul>
         </div>
