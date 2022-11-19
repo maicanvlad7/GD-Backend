@@ -16,6 +16,7 @@ use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\StoryController;
 use App\Models\Course;
 use Illuminate\Http\Request;
@@ -102,6 +103,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('getWatchingNowForUser', [ProgressController::class, 'getWatching']);
 
     Route::post('getRecommended', [CourseController::class, 'getRecommended']);
+    Route::post('getHostSocials', [SocialController::class, 'getByHostId']);
 
     Route::post('controlFav', [FavoritesController::class, 'controlFav']);
     Route::post('getFavorites', [FavoritesController::class, 'getFavorites']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Social;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SocialController extends Controller
 {
@@ -81,5 +82,16 @@ class SocialController extends Controller
     public function destroy(Social $social)
     {
         //
+    }
+
+    public function getByHostId(Request $request)
+    {
+        $socials = Social::where('host_id', $request->host_id)->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Socials gasite cu succes!',
+            'socials' => $socials,
+        ], Response::HTTP_OK);
     }
 }
