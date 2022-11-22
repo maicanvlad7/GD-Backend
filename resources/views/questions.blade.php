@@ -68,6 +68,7 @@
                                         <th>Curs</th>
                                         <th>Utilizator</th>
                                         <th>Intrebare</th>
+                                        <th>Raspuns</th>
                                         <th>Actiuni</th>
                                     </tr>
                                     </thead>
@@ -78,8 +79,12 @@
                                             <td>{{$u->name}}</td>
                                             <td>{{$u->cname}}</td>
                                             <td>{{$u->content}}</td>
+                                            <td>{{$u->ac}}</td>
                                             <td>
                                                 <a href="{{url('deleteQuestion') . "/" . $u->id}}" class="btn btn-outline-danger btn-xs">Sterge</a>
+                                                <a class="btn btn-warning block sender" onclick="addAnswer( {{$u->id}},{{$u->idhost}} )" data-bs-toggle="modal" data-bs-target="#border-less">
+                                                    Raspunde
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -90,7 +95,27 @@
                     </div>
                 </div>
             </div>
-
+            <div class="modal fade text-left modal-borderless" id="border-less" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Raspunde la intrebare</h5>
+                            <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                                <i data-feather="x"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{url('addAnswer')}}" method="POST">
+                                @csrf
+                                <input type="hidden" value="" name="aqid" id="aqid">
+                                <input type="hidden" value="" name="ahid" id="ahid">
+                                <textarea name="acontent" class="form-control" cols="30" placeholder="Raspuns intrebare"></textarea>
+                                <button class="mt-2 btn btn-light-success">Adauga raspuns</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
@@ -110,6 +135,19 @@
         // Simple Datatable
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+
+    <script>
+        //v = question id
+        //b = user id
+        //content from post
+        function addAnswer(v,b) {
+            let aqid = document.getElementById('aqid');
+            let ahid = document.getElementById('ahid');
+
+            aqid.value = v;
+            ahid.value = b;
+        }
     </script>
 
 

@@ -101,6 +101,8 @@ Route::post('saveLandingEdit', [DashController::class, 'saveLandingEdit']);
 Route::get('questions', [DashController::class, 'questions']);
 Route::post('addQuestion', [DashController::class, 'addQuestion']);
 Route::get('deleteQuestion/{id}', [DashController::class, 'deleteQuestion']);
+Route::post('addAnswer', [DashController::class, 'addAnswer']);
+
 
 //FREES
 //QUESTIONs

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Book;
 use App\Models\Calls;
 use App\Models\Course;
@@ -691,11 +692,14 @@ class DashController extends Controller
 
     public function questions()
     {
-        $sql = "SELECT courses.name as cname, users.name, questions.* FROM questions 
+        $sql = "SELECT answers.id as aid, answers.content as ac, courses.name as cname, courses.host as idhost, users.name, questions.* FROM questions 
                 INNER JOIN users on questions.user_id = users.id
-                INNER JOIN courses on questions.course_id = courses.id";
+                INNER JOIN courses on questions.course_id = courses.id
+                LEFT JOIN answers on questions.id = answers.question_id";
 
         $questions = DB::select($sql);
+
+
 
         $users = User::select(['id','email','name'])->where('is_bot', 1)->where('level', '>=' ,'2')->get();
         $courses = Course::select(['id','name'])->get();
@@ -728,6 +732,22 @@ class DashController extends Controller
 
         if($question->delete()) {
             return redirect()->back()->with('message', 'Ati sters intrebarea cu succes!');
+        }
+    }
+
+    public function addAnswer(Request $request)
+    {
+        $answer = new Answer();
+
+        $user = "SELECT id FROM users WHERE host_id = $request->ahid";
+        $rUser = DB::select($user);
+
+        $answer->question_id = $request->aqid;
+        $answer->user_id = $rUser[0]->id;
+        $answer->content = $request->acontent;
+
+        if($answer->save()) {
+            return redirect()->back()->with('message', 'Ati adaugat un raspuns cu succes!');
         }
     }
 
