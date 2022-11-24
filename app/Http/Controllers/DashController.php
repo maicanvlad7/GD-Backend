@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Answer;
 use App\Models\Book;
 use App\Models\Calls;
+use App\Models\Category;
 use App\Models\Course;
 use App\Models\Free;
 use App\Models\Host;
@@ -15,6 +16,7 @@ use App\Models\Payout;
 use App\Models\Question;
 use App\Models\Resource;
 use App\Models\Review;
+use App\Models\secondary;
 use App\Models\Social;
 use App\Models\Story;
 use App\Models\User;
@@ -759,6 +761,46 @@ class DashController extends Controller
 
         return 0;
 
+    }
+
+    public function getSecondaryCategoriesForCourse($id)
+    {
+        $course      = Course::with('category')->find($id);
+
+        $secondaries = secondary::where("id_course", $id)->with('category')->get();
+
+        $categories = DB::select("SELECT id, name FROM categories WHERE id NOT IN (SELECT id_category FROM secondaries WHERE id_course = $id) AND id != $course->category_id");
+
+        return view('secondaries', [
+            "course" => $course,
+            "secondaries" => $secondaries,
+            "categories" => $categories
+        ]);
+
+    }
+
+    public function addSecondaryCategoryToCourse(Request $request)
+    {
+        $second = new secondary();
+
+        foreach($request->all() as $key=>$val) {
+            if($key !=  "_token") {
+                $second->$key = $val;
+            }
+        }
+
+        if($second->save()) {
+            return redirect()->back()->with('message', 'Ati adaugat cursul in categoria secundara cu succes!');
+        }
+    }
+
+    public function deleteSecondaryCategory($id)
+    {
+        $second = secondary::find($id);
+
+        if($second->delete()) {
+            return redirect()->back()->with('message', 'Ati sters cursul din categoria secundara cu succes!');
+        }
     }
 
     public function payouts()

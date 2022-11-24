@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Host;
+use App\Models\secondary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,18 +19,29 @@ class CategoryController extends Controller
             $query->orderBy('score', 'desc');
         }])->first();
 
+        if($category->id) {
+            $secondaries = secondary::where('id_category',$category->id)->with('course')->get();
+
+            foreach($secondaries as $s) {
+                $category->courses->push($s->course);
+            }
+        }
+
         if($category->courses) {
             foreach($category->courses as $cc) {
                 $cc->host = Host::where('id', $cc->host)->first();
             }
         }
 
+        $unsorted = collect($category->courses);
+        $sorted = $unsorted->sortByDesc('score');
+
         if($category) {
             return response()->json([
                 "success" => true,
                 "message" => "Am gasit categoria",
                 "category" => $category,
-                "courses" => $category->courses
+                "courses" => $sorted
             ], 200);
         } else {
             return response()->json([

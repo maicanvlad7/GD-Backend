@@ -63,6 +63,10 @@ Route::get('cres/{id}', [DashController::class, 'getCourseRes']);
 Route::post('addResourceToCourse', [DashController::class, 'addResourceToCourse']);
 Route::get('deleteResource/{id}', [DashController::class, 'deleteResource']);
 
+
+Route::get('csecond/{id}', [DashController::class, 'getSecondaryCategoriesForCourse']);
+Route::post('addSecondary', [DashController::class, 'addSecondaryCategoryToCourse']);
+
 //STORIES
 Route::get('stories', [DashController::class, 'showAllStories']);
 Route::get('editStory/{id}', [DashController::class, 'editStory']);

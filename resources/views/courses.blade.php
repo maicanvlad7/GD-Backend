@@ -64,6 +64,9 @@
                                                         <a class="dropdown-item" href="{{url('/cres' . "/" . $u->id )}}">
                                                             <i class="bi bi-archive me-50"></i> Resurse
                                                         </a>
+                                                        <a class="dropdown-item" href="{{url('/csecond' . "/" . $u->id )}}">
+                                                            <i class="bi bi-twitch me-50"></i> Cat Secundare
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </td>
