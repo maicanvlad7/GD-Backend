@@ -94,11 +94,29 @@
         </div>
     </div>
 
-    <script src="{{asset('vendors/simple-datatables/simple-datatables.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+
     <script>
-        // Simple Datatable
-        let table1 = document.querySelector('#table1');
-        let dataTable = new simpleDatatables.DataTable(table1);
+        $(document).ready( function () {
+            let table = $('#table1').DataTable();
+
+            let lastPage = window.localStorage.getItem('cpage');
+
+
+            if(lastPage != null) {
+                table.page(parseInt(lastPage)).draw(false);
+            }
+
+            table.on('draw', function() {
+                let val = table.page.info().page;
+                window.localStorage.setItem('cpage', val);
+            })
+
+        });
+
     </script>
 
 @endsection
