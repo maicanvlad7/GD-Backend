@@ -34,7 +34,7 @@ class CategoryController extends Controller
         }
 
         $unsorted = collect($category->courses);
-        $sorted = $unsorted->sortByDesc('score');
+        $sorted = $unsorted->sortByDesc('score')->values()->all();
 
         if($category) {
             return response()->json([
