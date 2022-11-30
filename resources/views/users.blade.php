@@ -176,7 +176,7 @@
 
         });
 
-    </script>
+
 
         const nameContainer = document.getElementById('userCallContainer');
         const addCallAction = document.getElementById('addCallToDb');
