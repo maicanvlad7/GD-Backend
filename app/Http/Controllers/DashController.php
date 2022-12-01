@@ -290,12 +290,13 @@ class DashController extends Controller
             return Redirect::to('/login');
         }
 
-        $course = new Course();
+        $course = Course::find($id);
+        $categories = Category::all();
+        $category = Category::find($course->category_id);
 
-        $data = $course::where('id', $id)->first();
-        $data = $data->getOriginal();
-
-        return view('edit_course', ["data" => $data]);
+        return view('edit_course',
+            ["data" => $course, "category" => $category, 'categories' => $categories]
+        );
     }
 
     public function saveCourse(Request $request, $id)
@@ -307,6 +308,7 @@ class DashController extends Controller
         $course->score = $request->score;
         $course->image = $request->image;
         $course->description = $request->description;
+        $course->category_id = $request->category;
         $course->subtitle = $request->subtitle;
         $course->length = $request->length;
         $course->views = $request->views;

@@ -39,6 +39,14 @@
                                 <input type="text" id="subtitle" class="form-control" name="subtitle" placeholder="Subtitlu" value="{{$data['subtitle']}}">
                             </div>
                             <div class="form-group mt-1">
+                                <label for="category">Categorie</label>
+                                <select name="category" class="form-control" id="">
+                                    @foreach ($categories as $cat)
+                                        <option value="{{$cat->id}}" {{$cat->id == $category->id ? 'selected' : ''}}>{{$cat->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group mt-1">
                                 <label for="description">Descriere</label>
                                 <textarea type="text" id="description" rows="5" class="form-control" name="description" placeholder="Descriere">
                                     {{$data['description']}}
