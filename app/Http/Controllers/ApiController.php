@@ -31,13 +31,10 @@ class ApiController extends Controller
 
         $YOUR_DOMAIN = 'https://gandestediferit.ro/course/membership-levels';
 
+        $discount_codes = ["GD50","GD20","UNI20","AC100"];
 
-
-        if(strtoupper($request->dc) == "GD50" || strtoupper($request->dc) == "GD20" || strtoupper($request->dc) == "UNI20") {
+        if(in_array(strtoupper($request->dc), $discount_codes)) {
             if(isset($request->te) && $request->te == 1) {
-
-                $trial_end_date = Date('Y-m-d H:i:s', strtotime('+7 days'));
-                $trial_end = strtotime($trial_end_date);
 
                 $checkout_session = \Stripe\Checkout\Session::create([
                     'line_items' => [[
