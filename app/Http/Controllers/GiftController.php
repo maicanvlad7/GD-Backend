@@ -91,8 +91,8 @@ class GiftController extends Controller
             $gift = new Gift();
 
             $gift->code = Str::random('20');
-            $gift->pid  = "price_1MC7lRCLTsRzEEEVcHWk4Io8";
-            $gift->qr   = "https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=https://gandestediferit.ro/login-register/?pid=price_1MC7lRCLTsRzEEEVcHWk4Io8&kloiju=2&dc=GC100&gcc=" . $gift->code;
+            $gift->pid  = "price_1MC7ymCLTsRzEEEVsfgLDQ9L";
+            $gift->qr   = "https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=https://gandestediferit.ro/login-register/?pid=price_1MC7ymCLTsRzEEEVsfgLDQ9L&kloiju=2&dc=GC100&gcc=" . $gift->code;
             $gift->type = "pro";
 
             $gift->save();
