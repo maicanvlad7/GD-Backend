@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashController;
+use App\Http\Controllers\GiftController;
 use App\Http\Controllers\HostController;
 use Illuminate\Support\Facades\Route;
 
@@ -73,6 +74,9 @@ Route::get('editStory/{id}', [DashController::class, 'editStory']);
 Route::post('saveStoryEdit/{id}', [DashController::class, 'saveStoryEdit']);
 Route::post('addStory', [DashController::class, 'saveAddStory']);
 Route::get('deleteStory/{id}', [DashController::class, 'deleteStory']);
+
+
+Route::get('ppltbl', [GiftController::class, 'populateTable']);
 
 //BOOKS
 Route::get('books', [DashController::class, 'showAllBooks']);

@@ -6,6 +6,7 @@ use App\Http\Controllers\ClogController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\FreeController;
+use App\Http\Controllers\GiftController;
 use App\Http\Controllers\HostController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\NewsController;
@@ -68,8 +69,19 @@ Route::post('lll', [ClogController::class, 'store']);
 
 Route::post('spsu', [ApiController::class, 'stripeWebhookUpdateCall']);
 
+//create checkout session gift card
+Route::post('ccsgc', [GiftController::class, 'checkoutProduct']);
 
+//get gift card payment status
+Route::post('ggcps', [GiftController::class, 'getPaymentDetails']);
 
+//reset gift card
+Route::post('cdfdc', [GiftController::class, 'cancelCode']);
+
+//check gift card
+Route::post('checkGiftCard', [GiftController::class, 'checkGiftCard']);
+
+Route::post('markAsUsed', [GiftController::class, 'markAsUsed']);
 
 
 
