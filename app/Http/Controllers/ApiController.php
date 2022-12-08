@@ -31,7 +31,7 @@ class ApiController extends Controller
 
         $YOUR_DOMAIN = 'https://gandestediferit.ro/course/membership-levels';
 
-        $discount_codes = ["GD50","GD20","UNI20","AC100", "GC100"];
+        $discount_codes = ["GD50","GD20","UNI20","AC100", "GC100","MAN100"];
 
         if(in_array(strtoupper($request->dc), $discount_codes)) {
             if(isset($request->te) && $request->te == 1) {
