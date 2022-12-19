@@ -33,6 +33,8 @@ class ApiController extends Controller
 
         $discount_codes = ["GD50","GD20","UNI20","AC100", "GC100","MAN100"];
 
+        $uid = isset($request->uid) ? $request->uid : 0;
+
         if(in_array(strtoupper($request->dc), $discount_codes)) {
             if(isset($request->te) && $request->te == 1) {
 
@@ -51,7 +53,7 @@ class ApiController extends Controller
                     ]],
                     'tax_id_collection' => ['enabled' => true],
                     'locale' => 'ro',
-                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
+                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level . '&uid=' . $uid,
                     'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
                 ]);
             }else {
@@ -67,7 +69,7 @@ class ApiController extends Controller
                     ]],
                     'tax_id_collection' => ['enabled' => true],
                     'locale' => 'ro',
-                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
+                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level . '&uid=' . $uid,
                     'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
                 ]);
             }
@@ -86,7 +88,7 @@ class ApiController extends Controller
                     ],
                     'tax_id_collection' => ['enabled' => true],
                     'locale' => 'ro',
-                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
+                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level . '&uid=' . $uid,
                     'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
                 ]);
             }else {
@@ -99,7 +101,7 @@ class ApiController extends Controller
                     'mode' => 'subscription',
                     'tax_id_collection' => ['enabled' => true],
                     'locale' => 'ro',
-                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level,
+                    'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level . '&uid=' . $uid,
                     'cancel_url' => $YOUR_DOMAIN . '?canceled=true',
                 ]);
             }
