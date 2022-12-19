@@ -29,7 +29,7 @@ class ApiController extends Controller
 
 
 
-        $YOUR_DOMAIN = 'https://gandestediferit.ro/course/membership-levels';
+        $YOUR_DOMAIN = 'https://gandestediferit.ro/payment';
 
         $discount_codes = ["GD50","GD20","UNI20","AC100", "GC100","MAN100"];
 
