@@ -39,6 +39,7 @@
                                     <option value="5">Mindfulness & Lifestyle</option>
                                     <option value="6">Marketing & Vânzări</option>
                                     <option value="8">Educație Financiară</option>
+                                    <option value="9">Parenting</option>
                                 </select>
                             </div>
                             <div class="form-group mt-1">
