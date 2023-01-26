@@ -230,10 +230,7 @@ class DashController extends Controller
             return Redirect::to('/login');
         }
 
-        $user = new User();
-
-        $userData = $user::where('id', $id)->first();
-        $userData = $userData->getOriginal();
+        $userData = User::where('id', $id)->first();
 
         return view('edit_user', ["user" => $userData]);
     }
@@ -247,6 +244,7 @@ class DashController extends Controller
         $user->email = $request->email;
         $user->subscription = $request->subscription;
         $user->stripe_id = $request->stripe_id;
+        $user->level     = $request->level;
 
         if($user->save()) {
             return redirect()->back()->with('message', 'Ati editat cu succes userul ' . $user->name);

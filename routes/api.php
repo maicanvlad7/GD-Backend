@@ -27,6 +27,7 @@ use App\Http\Controllers\ProductController;
 
 Route::post('login', [ApiController::class, 'authenticate']);
 Route::post('register', [ApiController::class, 'register']);
+Route::post('register_provider', [ApiController::class, 'register_provider']);
 
 Route::post('stripe_session', [ApiController::class, 'stripe']);
 Route::post('stripe_customer_data', [ApiController::class, 'get_stripe_customer_data']);

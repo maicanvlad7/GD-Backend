@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activation;
+use App\Models\Benefit;
 use App\Models\Host;
 use App\Models\Reset;
 use Illuminate\Support\Str;
@@ -305,6 +306,9 @@ class ApiController extends Controller
     {
         //Validate data
         $data = $request->only('name', 'email', 'password', 'refCode', 'phone');
+
+        $benefit = Benefit::where('email', $request->email)->first();
+
         $validator = Validator::make($data, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
@@ -316,7 +320,6 @@ class ApiController extends Controller
             return response()->json(['error' => $validator->messages()], 200);
         }
 
-        $active = 0;
         $refBy = 0;
 
         if(isset($request->refCode) && !empty($request->refCode)) {
@@ -339,10 +342,6 @@ class ApiController extends Controller
 
         }
 
-        if(isset($request->pid) && !empty($request->pid)) {
-            $active = 1;
-        }
-
         //Request is valid, create new user
         $user = User::create([
             'name' => $request->name,
@@ -351,20 +350,10 @@ class ApiController extends Controller
             'phone' => $request->phone,
             'referred_by' => intval($refBy),
             'active'    => 1,
+            'level'     => $benefit ? 2 : 0,
+            'benefit'   => $benefit ? 1 : 0
         ]);
 
-        $new_time = date("Y-m-d H:i:s", strtotime('+5 hours'));
-
-       if(!$active) {
-           //user created, create activation code
-           $activation = Activation::create([
-               'user_id' => $user->id,
-               'code'    => Str::random(30),
-               'expires' => $new_time
-           ]);
-
-
-       }
 
         //User created, return success response
         return response()->json([
@@ -372,6 +361,45 @@ class ApiController extends Controller
             'message' => 'User created successfully',
             'data' => $user
         ], Response::HTTP_OK);
+    }
+
+    public function register_provider(Request $request)
+    {
+        if(!$request->has(['email','pid'])) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Bad request format',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $pid = $request->pid;
+        $email = $request->email;
+
+        $user = User::where('email', $email)->first();
+
+        //daca exista deja in baza de date doar ii facem update
+        if($user) {
+            $user->level = 2;
+            if($user->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Account already exists. Updated subsciption',
+                ], Response::HTTP_OK);
+            }
+            //daca nu exista in baza de date adaugam la conturi de benefit cu perioada de expirare si asteptam sa isi faca el register in platforma
+        }else {
+            $benefit = new Benefit();
+
+            $benefit->email = $email;
+            $benefit->expires = 3 * $pid;
+
+            if($benefit->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Account created. Awaiting user registration on platform',
+                ], Response::HTTP_OK);
+            }
+        }
     }
 
     public function authenticate(Request $request)

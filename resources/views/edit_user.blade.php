@@ -46,6 +46,14 @@
                                 <label for="stripe_id">Customer ID (Stripe)</label>
                                 <input type="text" id="stripe_id" class="form-control" name="stripe_id" placeholder="Customer ID" value="{{$user['stripe_id']}}">
                             </div>
+                            <div class="form-group mt-1">
+                                <label for="level">Level</label>
+                                <select name="level" class="form-control" id="level">
+                                    <option value="1" {{ $user['level'] == 1 ? "selected" : "" }}>1 - Basic</option>
+                                    <option value="2" {{ $user['level'] == 2 ? "selected" : "" }}>2 - Pro</option>
+                                    <option value="3" {{ $user['level'] == 3 ? "selected" : "" }}>3 - Premium</option>
+                                </select>
+                            </div>
                             <button class="btn btn-primary btn-xs mt-2">Salvează</button>
                         </form>
                     </div>
