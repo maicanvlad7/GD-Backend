@@ -47,7 +47,7 @@ class ApiController extends Controller
                     ]],
                     'mode' => 'subscription',
                     'subscription_data' => [
-                        "trial_period_days" => 30
+                        "trial_period_days" => 14
                     ],
                     'discounts' => [[
                         'coupon' => strtoupper($request->dc),
@@ -65,9 +65,6 @@ class ApiController extends Controller
                         'quantity' => 1,
                     ]],
                     'mode' => 'subscription',
-                    'subscription_data' => [
-                        "trial_period_days" => 30
-                    ],
                     'discounts' => [[
                         'coupon' => strtoupper($request->dc),
                     ]],
@@ -88,7 +85,7 @@ class ApiController extends Controller
                     ]],
                     'mode' => 'subscription',
                     'subscription_data' => [
-                        "trial_period_days" => 30
+                        "trial_period_days" => 14
                     ],
                     'tax_id_collection' => ['enabled' => true],
                     'locale' => 'ro',
@@ -103,9 +100,6 @@ class ApiController extends Controller
                         'quantity' => 1,
                     ]],
                     'mode' => 'subscription',
-                    'subscription_data' => [
-                        "trial_period_days" => 30
-                    ],
                     'tax_id_collection' => ['enabled' => true],
                     'locale' => 'ro',
                     'success_url' => $YOUR_DOMAIN . '?success=true&session_id={CHECKOUT_SESSION_ID}&kloiju=' . $request->level . '&uid=' . $uid,
