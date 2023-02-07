@@ -29,7 +29,9 @@ class CategoryController extends Controller
 
         if($category->courses) {
             foreach($category->courses as $cc) {
-                $cc->host = Host::where('id', $cc->host)->first();
+                if($cc->host){
+                    $cc->host = Host::where('id', $cc->host)->first();
+                }
             }
         }
 
