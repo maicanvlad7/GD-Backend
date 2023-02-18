@@ -254,7 +254,7 @@ class CourseController extends Controller
 
         foreach ($wn as $w) {
             //num lessons SQL
-            $nl = Lesson::where('course_id', $w->course_id)->where('is_trailer',0)->count();
+            $nl = Lesson::where('course_id', $w->course_id)->where('is_trailer',0)->where('is_sample', 0)->count();
 
             //see how many lessons from course user has finished
             $fl = Progress::select('id')

@@ -8,6 +8,7 @@ use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\FreeController;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\HostController;
+use App\Http\Controllers\KlaviyoController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NoteController;
@@ -85,6 +86,8 @@ Route::post('checkGiftCard', [GiftController::class, 'checkGiftCard']);
 Route::post('markAsUsed', [GiftController::class, 'markAsUsed']);
 
 Route::post('gfac', [CourseController::class, 'getFreeCourses']);
+
+Route::post('testMail', [KlaviyoController::class, 'test']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
 
