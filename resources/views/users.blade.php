@@ -21,7 +21,11 @@
                     <div class="col-md-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                Simple Datatable
+                                <span>Simple Datatable</span>
+                                <div class="d-flex">
+                                    <input type="number" id="pj" class="form-control w-25" placeholder="Sari la pagina...">
+                                    <button class="btn btn-info ms-1" id="gtp">Go</button>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <table class="table table-striped" id="table1">
@@ -164,15 +168,20 @@
 
             let lastPage = window.localStorage.getItem('upage');
 
+            let pj = document.getElementById('pj');
+            let gtp = document.getElementById('gtp');
+            let page = 0;
 
-            if(lastPage != null) {
-                table.page(parseInt(lastPage)).draw(false);
-            }
 
-            table.on('draw', function() {
-                let val = table.page.info().page;
-                window.localStorage.setItem('upage', val);
+            gtp.addEventListener('click', function() {
+                page = pj.value - 1;
+                table.page(page).draw(false);
+                pj.value = null;
+
             })
+
+
+
 
         });
 
