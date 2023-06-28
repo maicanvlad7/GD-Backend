@@ -32,7 +32,7 @@ class ApiController extends Controller
 
         $YOUR_DOMAIN = 'https://gandestediferit.ro/payment';
 
-        $discount_codes = ["GD50","GD20","UNI20","AC100", "GC100","MAN100", "JULLY"];
+        $discount_codes = ["GD50","GD20","UNI20","AC100", "GC100","MAN100", "JULLY", "S4F"];
 
         $uid = isset($request->uid) ? $request->uid : 0;
 
