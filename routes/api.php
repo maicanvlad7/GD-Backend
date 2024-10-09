@@ -37,6 +37,7 @@ Route::post('get_stripe_profile_data', [ApiController::class, 'get_stripe_profil
 
 Route::post('course/lesson/{id}', [CourseController::class, 'getById']);
 Route::post('courses/{slug}', [CourseController::class, 'getBySlug']);
+Route::post('courses', [CourseController::class, 'getAllCourses']);
 
 Route::post('category/{slug}', [CategoryController::class, 'getCoursesByCategorySlug']);
 Route::post('getAllCategories', [CategoryController::class, 'getAllCategories']);
