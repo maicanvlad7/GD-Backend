@@ -139,7 +139,7 @@ class CourseController extends Controller
 
     public function getFavoriteCourses(Request $request)
     {
-        $sql = "SELECT courses.*, favorites.course_id, favorites.user_id, hosts.name AS host_name FROM courses 
+        $sql = "SELECT courses.*, favorites.course_id, favorites.user_id, hosts.name AS host_name FROM courses
                 INNER JOIN favorites ON courses.id = favorites.course_id
                 INNER JOIN hosts     ON courses.host = hosts.id
                 WHERE favorites.user_id = $request->user_id";
@@ -312,6 +312,17 @@ class CourseController extends Controller
             "success" => true,
             "message" => "Got free course data",
             "course" => $course,
+        ], 200);
+    }
+
+    public function getAllCourses()
+    {
+        $courses = Course::all();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Got all courses data",
+            "courses" => $courses,
         ], 200);
     }
 
